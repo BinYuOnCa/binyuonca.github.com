@@ -1,0 +1,6 @@
+.DS_Store
+.deploy*/
+*.log
+public/
+db.json
+node_modules/

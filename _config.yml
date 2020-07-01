@@ -98,4 +98,8 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/BinYuOnCa/binyuonca.github.com.git
+  branch: master
+  message: "Message in Homepage/_config.yml"
+        

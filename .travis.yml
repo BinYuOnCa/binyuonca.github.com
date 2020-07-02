@@ -1,0 +1,38 @@
+language: node_js
+node_js: stable
+before_install:
+  # Basic config 
+  #
+        - git config --global user.name "Bin Yu"
+        - git config --global user.email "yubin.on.ca@gmail.com"
+        - sed -i "s#{GITHUB_REPO}#${GITHUB_TOKEN}@${GITHUB_REPO}#g"  _config.yml 
+
+   - "git ls-files -z | while read -d '' path; do touch -d \"$(git log -l -- format=\"@%ct\" \"$path\")\" \"$path\"; done"
+
+   - git clone --branch=master --single-branch https://${GITHUB_REPO}.git .deploy_git 
+
+
+install:
+- npm install babel-runtime@6
+- npm install -g hexo-cli
+- npm install hexo --save
+- npm install hexo-deployer-git --save
+- npm install hexo-leancloud-counter-security --save
+- npm install
+before_script:
+- hexo clean
+script:
+- hexo g
+- hexo d
+
+git:
+  depth: false
+branches:
+  only:
+   - pg-source
+
+
+env:
+  global:
+          GITHUB_REPO: github.com/BinYuOnCa/binyuonca.github.io
+          secure: Oh7JAm/I9+JL+hVSfBIXBxB8LhaHxTfFWxtUgfyXAZLMTAxleUoBNBKd5d3FVX34c6j/JGdlITZEbc1p9sfM2j+aQoIdMZ2M7F56Vf22q25XCVG2niwtEvoWKMLgo+bcbxuW/FEXcDhuIZ7k4dJh5dzbTB5uRdgWFNJtd2IV57nLv/EwUvm7JVXgkc0eiRn5DyXJT0yBVWsQeHDsUrlIGRAZmTFauwr0wpnyOAaBbTHvwGebkOQNDl+e0AzvLWFuxjopuUk1iXSa2ItDAKyKTT5VjkwXMOX3NkwBfchHqK1jwLUqiB5ixJzVRPqLxGOnQRZR87GS7ziYrtGvQCn5JRKtAm48hKGe/NL3OxfBb0uc0K9BanjAkbVcPFuNCUd3ulJ3J7XQdKteq5vX+AjrWxU+Cb1EpFf9rDIAEzNoTx3mipFqA0b7Vu8U9Q2JhrqhIh7NHu7Zy7I8/dNWfO51wC8yNTkE/Pdk8NykuVZnP2A77zf+T4SQAwwhJCUcQ7tLUgFRt49QQ9OuCV0NojJwMN7AUJIkXM3+JHhP8lxm3ps2jjJQF30IQXaq7h6YDqJ+xE/wOwlkktyO3Ayt+ic7NrGXDsGLlatNz6fMeuB+9sHdYlv1C2B6FIEdubIoJboE/N8KvcM0nCMKd/Bcb5+nAGh+Are8oVaM/Q/8f2xocIE=

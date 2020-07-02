@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: From Backend Engineer to Data Scientist
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
+author: Bin Yu  
 language: en
-timezone: ''
+timezone: 'America/Toronto'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://binyuonca.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

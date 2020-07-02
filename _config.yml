@@ -92,6 +92,14 @@ ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
+leancloud_counter_security:
+  enable_sync: true
+  app_id: ejiGxeycbXDtKDB0eLd0TOvx-MdYXbMMI
+  app_key: lNbbwMxW4v0L1xbOm5fMH2SM
+  username: ben-hexo-lc 
+  password: bXDtKDB0eLNbbwMxW4v
+
+
 ## Themes: https://hexo.io/themes/
 theme: next 
 
@@ -102,4 +110,6 @@ deploy:
   repo: https://github.com/BinYuOnCa/binyuonca.github.com.git
   branch: master
   message: "Message in Homepage/_config.yml"
+  
+  type: leancloud_counter_security_sync
         

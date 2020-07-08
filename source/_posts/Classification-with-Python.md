@@ -3,7 +3,8 @@ title: Classification with Python
 tags:
   - Python
   - Classification
-  - IBM
+  - Pandas
+  - seaborn
   - Coursera
 Category:
   - Machine Learning
@@ -15,9 +16,37 @@ Date: 2020-06-07 00:00:00
 
 <h1 align="center"><font size="5">Classification with Python</font></h1>
 
+1. [Environment and Dataset](#environment-and-dataset)
+   1. [About dataset](#about-dataset)
+   2. [Load Data From CSV File](#load-data-from-csv-file)
+   3. [Convert to date time object](#convert-to-date-time-object)
+2. [Pre-processing with Data visualization](#pre-processing-with-data-visualization)
+   1. [Visulaition the data](#visulaition-the-data)
+   2. [Categorical Encoding](#categorical-encoding)
+      1. [Gender](#gender)
+      2. [Education](#education)
+   3. [Feature selection](#feature-selection)
+   4. [Normalize Data](#normalize-data)
+3. [Classification](#classification)
+   1. [K Nearest Neighbor(KNN)](#k-nearest-neighborknn)
+   2. [Decision Tree](#decision-tree)
+   3. [Support Vector Machine](#support-vector-machine)
+   4. [Logistic Regression](#logistic-regression)
+4. [Model Evaluation using Test Data Set](#model-evaluation-using-test-data-set)
+   1. [Load Test Data Set for Evaluation](#load-test-data-set-for-evaluation)
+   2. [Pre-processing Test Data Set](#pre-processing-test-data-set)
+5. [Summary](#summary)
+  
 In this notebook we try to practice all the classification algorithms that we learned in this course.
 
 We load a dataset using Pandas library, and apply the following algorithms, and find the best one for this specific dataset by accuracy evaluation methods.
+
+- K Nearest Neibhbor (KNN)
+- Decision Tree (DT)
+- Support Vector Machine (SVM)
+- Logistic Regression (LR)
+
+# Environment and Dataset 
 
 Lets first load required libraries:
 
@@ -36,7 +65,7 @@ warnings.filterwarnings('ignore')
 %matplotlib inline
 ```
 
-### About dataset
+## About dataset
 
 This dataset is about past loans. The __Loan_train.csv__ data set includes details of 346 customers whose loan are already paid off or defaulted. It includes following fields:
 
@@ -55,7 +84,7 @@ Lets download the dataset
 
 !wget -O loan_train.csv https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_train.csv
 
-### Load Data From CSV File  
+## Load Data From CSV File  
 
 
 ```python
@@ -180,7 +209,7 @@ df.shape
 
 
 
-### Convert to date time object 
+## Convert to date time object 
 
 
 ```python
@@ -294,17 +323,17 @@ df.head()
 
 
 
-# Data visualization and pre-processing
+# Pre-processing with Data visualization
 
 
 
-
+Libs used in this section.
 ```python
 from sklearn import preprocessing
 import seaborn as sns
 
 ```
-
+## Visulaition the data
 Let’s see how many of each class is in our data set 
 
 
@@ -342,9 +371,9 @@ g.axes[-1].legend()
 plt.show()
 ```
 
-![png](/images/output_19_0.png)
+<!-- [png](/images/output_19_0.png) -->
 
-{% asset_img output_19_0.png Status by Principal and Gender %}
+{% asset_img output_19_0.png "Status by Principal and Gender" %}
 
 Let's see the Loan status of different age, per gender.
 
@@ -358,12 +387,11 @@ plt.show()
 ```
 
 
-![png](/images/output_20_0.png)
+<!-- ![png](/images/output_20_0.png) -->
+{% asset_img output_20_0.png "Status by age and Gender" %}
 
 
-# Pre-processing:  Feature selection/extraction
-
-### Lets look at the day of the week people get the loan 
+Lets look at the day of the week people get the loan. 
 
 
 ```python
@@ -377,8 +405,8 @@ plt.show()
 ```
 
 
-![png](/images/output_23_0.png)
-
+<!--  ![png](/images/output_23_0.png) -->
+{% asset_img output_23_0.png "Day of week" %}
 
 We see that people who get the loan at the end of the week dont pay it off, so lets use Feature binarization to set a threshold values less then day 4 
 
@@ -504,10 +532,16 @@ df.head()
 </div>
 
 
+## Categorical Encoding
 
-## Convert Categorical features to numerical values
+For categorical variables, we need convert them into numeric format (encoding) to fit in our Machine Learning algorithms. Whereas there are many method to implement, we introduce two common approaches here, Label Encoding and One Hot Encoding, for feature gender and education here, repspctively. 
 
-Lets look at gender:
+You may find more information here: [Guide to Encoding Categorical Values in Python](https://pbpython.com/categorical-encoding.html)
+
+### Gender
+
+Lets look at gender first:
+
 
 
 ```python
@@ -655,8 +689,9 @@ df.head()
 
 
 
-## One Hot Encoding  
-#### How about education?
+### Education 
+
+For education, there are four different values in data set, we will apply One Hot Encoding to this feature.
 
 
 ```python
@@ -679,7 +714,7 @@ df.groupby(['education'])['loan_status'].value_counts(normalize=True)
 
 
 
-#### Feature befor One Hot Encoding
+**Befor One Hot Encoding**
 
 
 ```python
@@ -1015,8 +1050,11 @@ df[features].head()
 
 
 
-#### Use one hot encoding technique to conver categorical varables to binary variables and append them to the feature Data Frame 
+**One Hot Encoding**
 
+Use One Hot Encoding technique to conver categorical varables to binary variables and append them to the feature Data Frame. 
+
+Here we use pandas function **get_dummies**.
 
 ```python
 Feature = df[['Principal','terms','age','Gender','weekend']]
@@ -1119,7 +1157,7 @@ Feature.head()
 
 
 
-### Feature selection
+## Feature selection
 
 Lets defind feature sets, X:
 
@@ -1290,7 +1328,7 @@ from sklearn import metrics
 
 ```
 
-# K Nearest Neighbor(KNN)
+## K Nearest Neighbor(KNN)
 Notice: You should find the best k to build the model with the best accuracy.  
 
 **warning:** You should not use the __loan_test.csv__ for finding the best k, however, you can split your train_loan.csv into train and test to find the best __k__.
@@ -1374,8 +1412,8 @@ plt.show();
 ```
 
 
-![png](/images/output_57_0.png)
-
+<!-- ![png](/images/output_57_0.png) -->
+{% asset_img output_57_0.png "Best K" %}
 
 
 ```python
@@ -1383,11 +1421,7 @@ best_k
 ```
 
 
-
-
     7
-
-
 
 
 ```python
@@ -1416,7 +1450,7 @@ kNeighbor
 
 
 
-# Decision Tree
+## Decision Tree
 
 
 ```python
@@ -1441,7 +1475,7 @@ sum(y_train == yhat )/len(y_train)
 
 
 
-### Visualization 
+**Visualization**
 
 
 ```python
@@ -1481,9 +1515,9 @@ plt.imshow(img, interpolation='nearest')
 
 
 ![png](/images/loanTree.png)
+{% asset_img loanTree.png "Desicion Tree Visualization" %}
 
-
-# Support Vector Machine
+## Support Vector Machine
 
 
 ```python
@@ -1502,7 +1536,7 @@ sum(y_test == yhat)/len(y_test)
 
 
 
-# Logistic Regression
+## Logistic Regression
 
 
 ```python
@@ -1529,7 +1563,7 @@ sum(lrYhat == y_test)/len(y_test)
 
 
 
-# Model Evaluation using Test set
+# Model Evaluation using Test Data Set
 
 
 ```python
@@ -1543,7 +1577,7 @@ First, download and load the test set:
 
 !wget -O loan_test.csv https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_test.csv
 
-### Load Test set for evaluation 
+## Load Test Data Set for Evaluation 
 
 
 ```python
@@ -1656,7 +1690,7 @@ test_df.head()
 
 
 
-### Pre-processing
+## Pre-processing Test Data Set
 
 
 
@@ -2120,7 +2154,8 @@ print('{:<21}       LogLoss: {:.2f}'.format('',data[-1]['LogLoss']))
                                 LogLoss: 0.57
 
 
-# Report
+# Summary 
+
 You should be able to report the accuracy of the built model using different evaluation metrics:
 
 

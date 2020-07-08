@@ -41,7 +41,7 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: True  # Chged to True to enable loading local image, Bin Yu 20200707
 relative_link: false
 future: true
 highlight:
@@ -106,10 +106,11 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
+-
   type: git
   repo: https://github.com/BinYuOnCa/binyuonca.github.com.git
   branch: master
   message: "Message in Homepage/_config.yml"
-  
+-  
   type: leancloud_counter_security_sync
         

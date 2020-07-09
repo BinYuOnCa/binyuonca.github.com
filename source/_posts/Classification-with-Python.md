@@ -12,6 +12,17 @@ date: 2020-07-08 17:11:50
 Date: 2020-06-07 00:00:00
 ---
 
+In this notebook we try to practice all the classification algorithms that we learned in this course.
+
+We load a dataset using Pandas library, and apply the following algorithms, and find the best one for this specific dataset by accuracy evaluation methods.
+
+- K Nearest Neibhbor (KNN)
+- Decision Tree (DT)
+- Support Vector Machine (SVM)
+- Logistic Regression (LR)
+
+<!-- more -->
+
 <a href="https://www.bigdatauniversity.com"><img src="https://ibm.box.com/shared/static/cw2c7r3o20w9zn8gkecaeyjhgw3xdgbj.png" width="400" align="center"></a>
 
 <h1 align="center"><font size="5">Classification with Python</font></h1>

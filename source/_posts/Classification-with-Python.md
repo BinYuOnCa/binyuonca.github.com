@@ -16,26 +16,26 @@ Date: 2020-06-07 00:00:00
 
 <h1 align="center"><font size="5">Classification with Python</font></h1>
 
-1. [Environment and Dataset](#environment-and-dataset)
-   1. [About dataset](#about-dataset)
-   2. [Load Data From CSV File](#load-data-from-csv-file)
-   3. [Convert to date time object](#convert-to-date-time-object)
-2. [Pre-processing with Data visualization](#pre-processing-with-data-visualization)
-   1. [Visulaition the data](#visulaition-the-data)
-   2. [Categorical Encoding](#categorical-encoding)
-      1. [Gender](#gender)
-      2. [Education](#education)
-   3. [Feature selection](#feature-selection)
-   4. [Normalize Data](#normalize-data)
-3. [Classification](#classification)
-   1. [K Nearest Neighbor(KNN)](#k-nearest-neighborknn)
-   2. [Decision Tree](#decision-tree)
-   3. [Support Vector Machine](#support-vector-machine)
-   4. [Logistic Regression](#logistic-regression)
-4. [Model Evaluation using Test Data Set](#model-evaluation-using-test-data-set)
-   1. [Load Test Data Set for Evaluation](#load-test-data-set-for-evaluation)
-   2. [Pre-processing Test Data Set](#pre-processing-test-data-set)
-5. [Summary](#summary)
+- [1. Environment and Dataset](#1-environment-and-dataset)
+  - [1.1. About dataset](#11-about-dataset)
+  - [1.2. Load Data From CSV File](#12-load-data-from-csv-file)
+  - [1.3. Convert to date time object](#13-convert-to-date-time-object)
+- [2. Pre-processing with Data visualization](#2-pre-processing-with-data-visualization)
+  - [2.1. Visulaition the data](#21-visulaition-the-data)
+  - [2.2. Categorical Encoding](#22-categorical-encoding)
+    - [2.2.1. Gender](#221-gender)
+    - [2.2.2. Education](#222-education)
+  - [2.3. Feature selection](#23-feature-selection)
+  - [2.4. Normalize Data](#24-normalize-data)
+- [3. Classification](#3-classification)
+  - [3.1. K Nearest Neighbor(KNN)](#31-k-nearest-neighborknn)
+  - [3.2. Decision Tree](#32-decision-tree)
+  - [3.3. Support Vector Machine](#33-support-vector-machine)
+  - [3.4. Logistic Regression](#34-logistic-regression)
+- [4. Model Evaluation using Test Data Set](#4-model-evaluation-using-test-data-set)
+  - [4.1. Load Test Data Set for Evaluation](#41-load-test-data-set-for-evaluation)
+  - [4.2. Pre-processing Test Data Set](#42-pre-processing-test-data-set)
+- [5. Summary](#5-summary)
   
 In this notebook we try to practice all the classification algorithms that we learned in this course.
 
@@ -46,7 +46,7 @@ We load a dataset using Pandas library, and apply the following algorithms, and 
 - Support Vector Machine (SVM)
 - Logistic Regression (LR)
 
-# Environment and Dataset 
+# 1. Environment and Dataset
 
 Lets first load required libraries:
 
@@ -65,7 +65,7 @@ warnings.filterwarnings('ignore')
 %matplotlib inline
 ```
 
-## About dataset
+## 1.1. About dataset
 
 This dataset is about past loans. The __Loan_train.csv__ data set includes details of 346 customers whose loan are already paid off or defaulted. It includes following fields:
 
@@ -84,7 +84,7 @@ Lets download the dataset
 
 !wget -O loan_train.csv https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_train.csv
 
-## Load Data From CSV File  
+## 1.2. Load Data From CSV File
 
 
 ```python
@@ -209,7 +209,7 @@ df.shape
 
 
 
-## Convert to date time object 
+## 1.3. Convert to date time object
 
 
 ```python
@@ -323,7 +323,7 @@ df.head()
 
 
 
-# Pre-processing with Data visualization
+# 2. Pre-processing with Data visualization
 
 
 
@@ -333,7 +333,7 @@ from sklearn import preprocessing
 import seaborn as sns
 
 ```
-## Visulaition the data
+## 2.1. Visulaition the data
 Let’s see how many of each class is in our data set 
 
 
@@ -532,13 +532,13 @@ df.head()
 </div>
 
 
-## Categorical Encoding
+## 2.2. Categorical Encoding
 
 For categorical variables, we need convert them into numeric format (encoding) to fit in our Machine Learning algorithms. Whereas there are many method to implement, we introduce two common approaches here, Label Encoding and One Hot Encoding, for feature gender and education here, repspctively. 
 
 You may find more information here: [Guide to Encoding Categorical Values in Python](https://pbpython.com/categorical-encoding.html)
 
-### Gender
+### 2.2.1. Gender
 
 Lets look at gender first:
 
@@ -689,7 +689,7 @@ df.head()
 
 
 
-### Education 
+### 2.2.2. Education 
 
 For education, there are four different values in data set, we will apply One Hot Encoding to this feature.
 
@@ -1157,7 +1157,7 @@ Feature.head()
 
 
 
-## Feature selection
+## 2.3. Feature selection
 
 Lets defind feature sets, X:
 
@@ -1276,7 +1276,7 @@ y[0:5]
 
 
 
-## Normalize Data 
+## 2.4. Normalize Data 
 
 Data Standardization give data zero mean and unit variance (technically should be done after train test split )
 
@@ -1302,7 +1302,7 @@ X[0:5]
 
 
 
-# Classification 
+# 3. Classification 
 
 Now, it is your turn, use the training set to build an accurate model. Then use the test set to report the accuracy of the model
 You should use the following algorithm:
@@ -1328,7 +1328,7 @@ from sklearn import metrics
 
 ```
 
-## K Nearest Neighbor(KNN)
+## 3.1. K Nearest Neighbor(KNN)
 Notice: You should find the best k to build the model with the best accuracy.  
 
 **warning:** You should not use the __loan_test.csv__ for finding the best k, however, you can split your train_loan.csv into train and test to find the best __k__.
@@ -1450,7 +1450,7 @@ kNeighbor
 
 
 
-## Decision Tree
+## 3.2. Decision Tree
 
 
 ```python
@@ -1514,10 +1514,10 @@ plt.imshow(img, interpolation='nearest')
 
 
 
-![png](/images/loanTree.png)
+<!-- ![png](/images/loanTree.png) -->
 {% asset_img loanTree.png "Desicion Tree Visualization" %}
 
-## Support Vector Machine
+## 3.3. Support Vector Machine
 
 
 ```python
@@ -1536,7 +1536,7 @@ sum(y_test == yhat)/len(y_test)
 
 
 
-## Logistic Regression
+## 3.4. Logistic Regression
 
 
 ```python
@@ -1563,7 +1563,7 @@ sum(lrYhat == y_test)/len(y_test)
 
 
 
-# Model Evaluation using Test Data Set
+# 4. Model Evaluation using Test Data Set
 
 
 ```python
@@ -1577,7 +1577,7 @@ First, download and load the test set:
 
 !wget -O loan_test.csv https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_test.csv
 
-## Load Test Data Set for Evaluation 
+## 4.1. Load Test Data Set for Evaluation 
 
 
 ```python
@@ -1690,7 +1690,7 @@ test_df.head()
 
 
 
-## Pre-processing Test Data Set
+## 4.2. Pre-processing Test Data Set
 
 
 
@@ -2154,7 +2154,7 @@ print('{:<21}       LogLoss: {:.2f}'.format('',data[-1]['LogLoss']))
                                 LogLoss: 0.57
 
 
-# Summary 
+# 5. Summary 
 
 You should be able to report the accuracy of the built model using different evaluation metrics:
 

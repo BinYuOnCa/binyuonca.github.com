@@ -186,7 +186,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-07-08 17:11:50 / Modified: 18:43:43" itemprop="dateCreated datePublished" datetime="2020-07-08T17:11:50-04:00">2020-07-08</time>
+              <time title="Created: 2020-07-08 17:11:50 / Modified: 21:58:38" itemprop="dateCreated datePublished" datetime="2020-07-08T17:11:50-04:00">2020-07-08</time>
             </span>
 
           
@@ -224,38 +224,38 @@
           <p><a href="https://www.bigdatauniversity.com" target="_blank" rel="noopener"><img src="https://ibm.box.com/shared/static/cw2c7r3o20w9zn8gkecaeyjhgw3xdgbj.png" width="400" align="center"></a></p>
 <h1 align="center"><font size="5">Classification with Python</font></h1>
 
-<ol>
-<li><a href="#environment-and-dataset">Environment and Dataset</a><ol>
-<li><a href="#about-dataset">About dataset</a></li>
-<li><a href="#load-data-from-csv-file">Load Data From CSV File</a></li>
-<li><a href="#convert-to-date-time-object">Convert to date time object</a></li>
-</ol>
+<ul>
+<li><a href="#1-environment-and-dataset">1. Environment and Dataset</a><ul>
+<li><a href="#11-about-dataset">1.1. About dataset</a></li>
+<li><a href="#12-load-data-from-csv-file">1.2. Load Data From CSV File</a></li>
+<li><a href="#13-convert-to-date-time-object">1.3. Convert to date time object</a></li>
+</ul>
 </li>
-<li><a href="#pre-processing-with-data-visualization">Pre-processing with Data visualization</a><ol>
-<li><a href="#visulaition-the-data">Visulaition the data</a></li>
-<li><a href="#categorical-encoding">Categorical Encoding</a><ol>
-<li><a href="#gender">Gender</a></li>
-<li><a href="#education">Education</a></li>
-</ol>
+<li><a href="#2-pre-processing-with-data-visualization">2. Pre-processing with Data visualization</a><ul>
+<li><a href="#21-visulaition-the-data">2.1. Visulaition the data</a></li>
+<li><a href="#22-categorical-encoding">2.2. Categorical Encoding</a><ul>
+<li><a href="#221-gender">2.2.1. Gender</a></li>
+<li><a href="#222-education">2.2.2. Education</a></li>
+</ul>
 </li>
-<li><a href="#feature-selection">Feature selection</a></li>
-<li><a href="#normalize-data">Normalize Data</a></li>
-</ol>
+<li><a href="#23-feature-selection">2.3. Feature selection</a></li>
+<li><a href="#24-normalize-data">2.4. Normalize Data</a></li>
+</ul>
 </li>
-<li><a href="#classification">Classification</a><ol>
-<li><a href="#k-nearest-neighborknn">K Nearest Neighbor(KNN)</a></li>
-<li><a href="#decision-tree">Decision Tree</a></li>
-<li><a href="#support-vector-machine">Support Vector Machine</a></li>
-<li><a href="#logistic-regression">Logistic Regression</a></li>
-</ol>
+<li><a href="#3-classification">3. Classification</a><ul>
+<li><a href="#31-k-nearest-neighborknn">3.1. K Nearest Neighbor(KNN)</a></li>
+<li><a href="#32-decision-tree">3.2. Decision Tree</a></li>
+<li><a href="#33-support-vector-machine">3.3. Support Vector Machine</a></li>
+<li><a href="#34-logistic-regression">3.4. Logistic Regression</a></li>
+</ul>
 </li>
-<li><a href="#model-evaluation-using-test-data-set">Model Evaluation using Test Data Set</a><ol>
-<li><a href="#load-test-data-set-for-evaluation">Load Test Data Set for Evaluation</a></li>
-<li><a href="#pre-processing-test-data-set">Pre-processing Test Data Set</a></li>
-</ol>
+<li><a href="#4-model-evaluation-using-test-data-set">4. Model Evaluation using Test Data Set</a><ul>
+<li><a href="#41-load-test-data-set-for-evaluation">4.1. Load Test Data Set for Evaluation</a></li>
+<li><a href="#42-pre-processing-test-data-set">4.2. Pre-processing Test Data Set</a></li>
+</ul>
 </li>
-<li><a href="#summary">Summary</a></li>
-</ol>
+<li><a href="#5-summary">5. Summary</a></li>
+</ul>
 <p>In this notebook we try to practice all the classification algorithms that we learned in this course.</p>
 <p>We load a dataset using Pandas library, and apply the following algorithms, and find the best one for this specific dataset by accuracy evaluation methods.</p>
 <ul>
@@ -264,10 +264,10 @@
 <li>Support Vector Machine (SVM)</li>
 <li>Logistic Regression (LR)</li>
 </ul>
-<h1 id="Environment-and-Dataset"><a href="#Environment-and-Dataset" class="headerlink" title="Environment and Dataset"></a>Environment and Dataset</h1><p>Lets first load required libraries:</p>
+<h1 id="1-Environment-and-Dataset"><a href="#1-Environment-and-Dataset" class="headerlink" title="1. Environment and Dataset"></a>1. Environment and Dataset</h1><p>Lets first load required libraries:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib.ticker <span class="keyword">import</span> NullFormatter</span><br><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> ticker</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
 
-<h2 id="About-dataset"><a href="#About-dataset" class="headerlink" title="About dataset"></a>About dataset</h2><p>This dataset is about past loans. The <strong>Loan_train.csv</strong> data set includes details of 346 customers whose loan are already paid off or defaulted. It includes following fields:</p>
+<h2 id="1-1-About-dataset"><a href="#1-1-About-dataset" class="headerlink" title="1.1. About dataset"></a>1.1. About dataset</h2><p>This dataset is about past loans. The <strong>Loan_train.csv</strong> data set includes details of 346 customers whose loan are already paid off or defaulted. It includes following fields:</p>
 <table>
 <thead>
 <tr>
@@ -310,7 +310,7 @@
 </tbody></table>
 <p>Lets download the dataset</p>
 <p>!wget -O loan_train.csv <a href="https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_train.csv" target="_blank" rel="noopener">https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_train.csv</a></p>
-<h2 id="Load-Data-From-CSV-File"><a href="#Load-Data-From-CSV-File" class="headerlink" title="Load Data From CSV File"></a>Load Data From CSV File</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">'loan_train.csv'</span>)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-Load-Data-From-CSV-File"><a href="#1-2-Load-Data-From-CSV-File" class="headerlink" title="1.2. Load Data From CSV File"></a>1.2. Load Data From CSV File</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">'loan_train.csv'</span>)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
 
 
 
@@ -422,7 +422,7 @@
 
 
 
-<pre><code>(346, 10)</code></pre><h2 id="Convert-to-date-time-object"><a href="#Convert-to-date-time-object" class="headerlink" title="Convert to date time object"></a>Convert to date time object</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'due_date'</span>] = pd.to_datetime(df[<span class="string">'due_date'</span>])</span><br><span class="line">df[<span class="string">'effective_date'</span>] = pd.to_datetime(df[<span class="string">'effective_date'</span>])</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<pre><code>(346, 10)</code></pre><h2 id="1-3-Convert-to-date-time-object"><a href="#1-3-Convert-to-date-time-object" class="headerlink" title="1.3. Convert to date time object"></a>1.3. Convert to date time object</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'due_date'</span>] = pd.to_datetime(df[<span class="string">'due_date'</span>])</span><br><span class="line">df[<span class="string">'effective_date'</span>] = pd.to_datetime(df[<span class="string">'effective_date'</span>])</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
 
 
 
@@ -528,9 +528,9 @@
 
 
 
-<h1 id="Pre-processing-with-Data-visualization"><a href="#Pre-processing-with-Data-visualization" class="headerlink" title="Pre-processing with Data visualization"></a>Pre-processing with Data visualization</h1><p>Libs used in this section.</p>
+<h1 id="2-Pre-processing-with-Data-visualization"><a href="#2-Pre-processing-with-Data-visualization" class="headerlink" title="2. Pre-processing with Data visualization"></a>2. Pre-processing with Data visualization</h1><p>Libs used in this section.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br></pre></td></tr></table></figure>
-<h2 id="Visulaition-the-data"><a href="#Visulaition-the-data" class="headerlink" title="Visulaition the data"></a>Visulaition the data</h2><p>Let’s see how many of each class is in our data set </p>
+<h2 id="2-1-Visulaition-the-data"><a href="#2-1-Visulaition-the-data" class="headerlink" title="2.1. Visulaition the data"></a>2.1. Visulaition the data</h2><p>Let’s see how many of each class is in our data set </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'loan_status'</span>].value_counts()</span><br></pre></td></tr></table></figure>
 
 
@@ -681,9 +681,9 @@ Name: loan_status, dtype: int64</code></pre><p>260 people have paid off the loan
 </div>
 
 
-<h2 id="Categorical-Encoding"><a href="#Categorical-Encoding" class="headerlink" title="Categorical Encoding"></a>Categorical Encoding</h2><p>For categorical variables, we need convert them into numeric format (encoding) to fit in our Machine Learning algorithms. Whereas there are many method to implement, we introduce two common approaches here, Label Encoding and One Hot Encoding, for feature gender and education here, repspctively. </p>
+<h2 id="2-2-Categorical-Encoding"><a href="#2-2-Categorical-Encoding" class="headerlink" title="2.2. Categorical Encoding"></a>2.2. Categorical Encoding</h2><p>For categorical variables, we need convert them into numeric format (encoding) to fit in our Machine Learning algorithms. Whereas there are many method to implement, we introduce two common approaches here, Label Encoding and One Hot Encoding, for feature gender and education here, repspctively. </p>
 <p>You may find more information here: <a href="https://pbpython.com/categorical-encoding.html" target="_blank" rel="noopener">Guide to Encoding Categorical Values in Python</a></p>
-<h3 id="Gender"><a href="#Gender" class="headerlink" title="Gender"></a>Gender</h3><p>Lets look at gender first:</p>
+<h3 id="2-2-1-Gender"><a href="#2-2-1-Gender" class="headerlink" title="2.2.1. Gender"></a>2.2.1. Gender</h3><p>Lets look at gender first:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby([<span class="string">'Gender'</span>])[<span class="string">'loan_status'</span>].value_counts(normalize=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
 
@@ -814,7 +814,7 @@ Name: loan_status, dtype: float64</code></pre><p>86 % of female pay there loans 
 
 
 
-<h3 id="Education"><a href="#Education" class="headerlink" title="Education"></a>Education</h3><p>For education, there are four different values in data set, we will apply One Hot Encoding to this feature.</p>
+<h3 id="2-2-2-Education"><a href="#2-2-2-Education" class="headerlink" title="2.2.2. Education"></a>2.2.2. Education</h3><p>For education, there are four different values in data set, we will apply One Hot Encoding to this feature.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.groupby([<span class="string">'education'</span>])[<span class="string">'loan_status'</span>].value_counts(normalize=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
 
@@ -1250,7 +1250,7 @@ Name: loan_status, dtype: float64</code></pre><p><strong>Befor One Hot Encoding<
 
 
 
-<h2 id="Feature-selection"><a href="#Feature-selection" class="headerlink" title="Feature selection"></a>Feature selection</h2><p>Lets defind feature sets, X:</p>
+<h2 id="2-3-Feature-selection"><a href="#2-3-Feature-selection" class="headerlink" title="2.3. Feature selection"></a>2.3. Feature selection</h2><p>Lets defind feature sets, X:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = Feature</span><br><span class="line">X[<span class="number">0</span>:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
 
 
@@ -1352,7 +1352,7 @@ Name: loan_status, dtype: float64</code></pre><p><strong>Befor One Hot Encoding<
 
 
 <pre><code>array([&apos;PAIDOFF&apos;, &apos;PAIDOFF&apos;, &apos;PAIDOFF&apos;, &apos;PAIDOFF&apos;, &apos;PAIDOFF&apos;],
-      dtype=object)</code></pre><h2 id="Normalize-Data"><a href="#Normalize-Data" class="headerlink" title="Normalize Data"></a>Normalize Data</h2><p>Data Standardization give data zero mean and unit variance (technically should be done after train test split )</p>
+      dtype=object)</code></pre><h2 id="2-4-Normalize-Data"><a href="#2-4-Normalize-Data" class="headerlink" title="2.4. Normalize Data"></a>2.4. Normalize Data</h2><p>Data Standardization give data zero mean and unit variance (technically should be done after train test split )</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X= preprocessing.StandardScaler().fit(X).transform(X)</span><br><span class="line">X[<span class="number">0</span>:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
 
 
@@ -1367,7 +1367,7 @@ Name: loan_status, dtype: float64</code></pre><p><strong>Befor One Hot Encoding<
        [ 0.51578458,  0.92071769, -0.48739188,  2.37778177,  0.82934003,
         -0.38170062, -0.87997669,  1.14984679],
        [ 0.51578458,  0.92071769, -0.3215732 , -0.42056004,  0.82934003,
-        -0.38170062, -0.87997669,  1.14984679]])</code></pre><h1 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h1><p>Now, it is your turn, use the training set to build an accurate model. Then use the test set to report the accuracy of the model<br>You should use the following algorithm:</p>
+        -0.38170062, -0.87997669,  1.14984679]])</code></pre><h1 id="3-Classification"><a href="#3-Classification" class="headerlink" title="3. Classification"></a>3. Classification</h1><p>Now, it is your turn, use the training set to build an accurate model. Then use the test set to report the accuracy of the model<br>You should use the following algorithm:</p>
 <ul>
 <li>K Nearest Neighbor(KNN)</li>
 <li>Decision Tree</li>
@@ -1384,7 +1384,7 @@ __ Notice:__
 <p>Common Libararies Needed for all models</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split <span class="keyword">as</span> split</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</span><br></pre></td></tr></table></figure>
 
-<h2 id="K-Nearest-Neighbor-KNN"><a href="#K-Nearest-Neighbor-KNN" class="headerlink" title="K Nearest Neighbor(KNN)"></a>K Nearest Neighbor(KNN)</h2><p>Notice: You should find the best k to build the model with the best accuracy.  </p>
+<h2 id="3-1-K-Nearest-Neighbor-KNN"><a href="#3-1-K-Nearest-Neighbor-KNN" class="headerlink" title="3.1. K Nearest Neighbor(KNN)"></a>3.1. K Nearest Neighbor(KNN)</h2><p>Notice: You should find the best k to build the model with the best accuracy.  </p>
 <p><strong>warning:</strong> You should not use the <strong>loan_test.csv</strong> for finding the best k, however, you can split your train_loan.csv into train and test to find the best <strong>k</strong>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br></pre></td></tr></table></figure>
 
@@ -1426,7 +1426,7 @@ __ Notice:__
 
 <pre><code>KNeighborsClassifier(algorithm=&apos;auto&apos;, leaf_size=30, metric=&apos;minkowski&apos;,
                      metric_params=None, n_jobs=None, n_neighbors=7, p=2,
-                     weights=&apos;uniform&apos;)</code></pre><h2 id="Decision-Tree"><a href="#Decision-Tree" class="headerlink" title="Decision Tree"></a>Decision Tree</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br></pre></td></tr></table></figure>
+                     weights=&apos;uniform&apos;)</code></pre><h2 id="3-2-Decision-Tree"><a href="#3-2-Decision-Tree" class="headerlink" title="3.2. Decision Tree"></a>3.2. Decision Tree</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> tree</span><br></pre></td></tr></table></figure>
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">loanTree = DecisionTreeClassifier(criterion=<span class="string">"entropy"</span>, max_depth = <span class="number">4</span>)</span><br><span class="line">loanTree.fit(X_train,y_train)</span><br><span class="line"></span><br><span class="line">yhat = loanTree.predict(X_train)</span><br><span class="line">sum(y_train == yhat )/len(y_train)</span><br></pre></td></tr></table></figure>
@@ -1443,15 +1443,15 @@ __ Notice:__
 
 
 
-<pre><code>&lt;matplotlib.image.AxesImage at 0x7f9e2f1b37f0&gt;</code></pre><p><img src="/images/loanTree.png" alt="png"></p>
+<pre><code>&lt;matplotlib.image.AxesImage at 0x7f9e2f1b37f0&gt;</code></pre><!-- ![png](/images/loanTree.png) -->
 <img src="/2020/07/08/Classification-with-Python/loanTree.png" class="" title="Desicion Tree Visualization">
 
-<h2 id="Support-Vector-Machine"><a href="#Support-Vector-Machine" class="headerlink" title="Support Vector Machine"></a>Support Vector Machine</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line">svm_Model = svm.SVC(kernel=<span class="string">'rbf'</span>)</span><br><span class="line">svm_Model.fit(X_train, y_train) </span><br><span class="line"></span><br><span class="line">yhat = svm_Model.predict(X_test)</span><br><span class="line">sum(y_test == yhat)/len(y_test)</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-Support-Vector-Machine"><a href="#3-3-Support-Vector-Machine" class="headerlink" title="3.3. Support Vector Machine"></a>3.3. Support Vector Machine</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</span><br><span class="line">svm_Model = svm.SVC(kernel=<span class="string">'rbf'</span>)</span><br><span class="line">svm_Model.fit(X_train, y_train) </span><br><span class="line"></span><br><span class="line">yhat = svm_Model.predict(X_test)</span><br><span class="line">sum(y_test == yhat)/len(y_test)</span><br></pre></td></tr></table></figure>
 
 
 
 
-<pre><code>0.7428571428571429</code></pre><h2 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#from sklearn.linear_model import LogistricRegression</span></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br></pre></td></tr></table></figure>
+<pre><code>0.7428571428571429</code></pre><h2 id="3-4-Logistic-Regression"><a href="#3-4-Logistic-Regression" class="headerlink" title="3.4. Logistic Regression"></a>3.4. Logistic Regression</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#from sklearn.linear_model import LogistricRegression</span></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br></pre></td></tr></table></figure>
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LR_Model = LogisticRegression( C = <span class="number">0.01</span>, solver = <span class="string">'liblinear'</span>)</span><br><span class="line">LR_Model.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">lrYhat = LR_Model.predict(X_test)</span><br><span class="line">lrYhat_prob = LR_Model.predict_proba(X_test)</span><br><span class="line">sum(lrYhat == y_test)/len(y_test)</span><br></pre></td></tr></table></figure>
@@ -1459,11 +1459,11 @@ __ Notice:__
 
 
 
-<pre><code>0.6857142857142857</code></pre><h1 id="Model-Evaluation-using-Test-Data-Set"><a href="#Model-Evaluation-using-Test-Data-Set" class="headerlink" title="Model Evaluation using Test Data Set"></a>Model Evaluation using Test Data Set</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> jaccard_similarity_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> f1_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> log_loss</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> jaccard_score</span><br></pre></td></tr></table></figure>
+<pre><code>0.6857142857142857</code></pre><h1 id="4-Model-Evaluation-using-Test-Data-Set"><a href="#4-Model-Evaluation-using-Test-Data-Set" class="headerlink" title="4. Model Evaluation using Test Data Set"></a>4. Model Evaluation using Test Data Set</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> jaccard_similarity_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> f1_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> log_loss</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> jaccard_score</span><br></pre></td></tr></table></figure>
 
 <p>First, download and load the test set:</p>
 <p>!wget -O loan_test.csv <a href="https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_test.csv" target="_blank" rel="noopener">https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_test.csv</a></p>
-<h2 id="Load-Test-Data-Set-for-Evaluation"><a href="#Load-Test-Data-Set-for-Evaluation" class="headerlink" title="Load Test Data Set for Evaluation"></a>Load Test Data Set for Evaluation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_df = pd.read_csv(<span class="string">'loan_test.csv'</span>)</span><br><span class="line">test_df.head()</span><br></pre></td></tr></table></figure>
+<h2 id="4-1-Load-Test-Data-Set-for-Evaluation"><a href="#4-1-Load-Test-Data-Set-for-Evaluation" class="headerlink" title="4.1. Load Test Data Set for Evaluation"></a>4.1. Load Test Data Set for Evaluation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_df = pd.read_csv(<span class="string">'loan_test.csv'</span>)</span><br><span class="line">test_df.head()</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1569,7 +1569,7 @@ __ Notice:__
 
 
 
-<h2 id="Pre-processing-Test-Data-Set"><a href="#Pre-processing-Test-Data-Set" class="headerlink" title="Pre-processing Test Data Set"></a>Pre-processing Test Data Set</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test_df[<span class="string">'due_date'</span>] = pd.to_datetime(test_df[<span class="string">'due_date'</span>])</span><br><span class="line">test_df[<span class="string">'effective_date'</span>] = pd.to_datetime(test_df[<span class="string">'effective_date'</span>])</span><br><span class="line"></span><br><span class="line">test_df.head()</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-Pre-processing-Test-Data-Set"><a href="#4-2-Pre-processing-Test-Data-Set" class="headerlink" title="4.2. Pre-processing Test Data Set"></a>4.2. Pre-processing Test Data Set</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test_df[<span class="string">'due_date'</span>] = pd.to_datetime(test_df[<span class="string">'due_date'</span>])</span><br><span class="line">test_df[<span class="string">'effective_date'</span>] = pd.to_datetime(test_df[<span class="string">'effective_date'</span>])</span><br><span class="line"></span><br><span class="line">test_df.head()</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1949,7 +1949,7 @@ SVM                   Jaccard index: 0.80
 ------------------------------------------
 LogisticRegression    Jaccard index: 0.74
                            F1-score: 0.66
-                            LogLoss: 0.57</code></pre><h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>You should be able to report the accuracy of the built model using different evaluation metrics:</p>
+                            LogLoss: 0.57</code></pre><h1 id="5-Summary"><a href="#5-Summary" class="headerlink" title="5. Summary"></a>5. Summary</h1><p>You should be able to report the accuracy of the built model using different evaluation metrics:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">accuracy_report = pd.DataFrame(data, </span><br><span class="line">                         index = [<span class="string">'KNN'</span>, <span class="string">'Decision Tree'</span>, <span class="string">'SVM'</span>,<span class="string">'LogisticRegression'</span>],</span><br><span class="line">                         columns = [<span class="string">'Jaccard'</span>,<span class="string">'F1-score'</span>,<span class="string">'LogLoss'</span>],</span><br><span class="line">                        )</span><br></pre></td></tr></table></figure>
 
 

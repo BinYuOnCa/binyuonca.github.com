@@ -12,9 +12,9 @@ before_install:
   - "sed -i \"s#{GITHUB_REPO}#${GITHUB_TOKEN}@${GITHUB_REPO}#g\"  _config.yml"
 
   # 修改站点配置文件LeanCloud Counter Security里的LeanCloud Counter App ID的信息
-  - sed -i "s#${LEANCLOUD_VISITORCOUNTER_TMP_ID}#${LEANCLOUD_VISITORCOUNTER_ID}#g" _config.yml
+  #- sed -i "s#${LEANCLOUD_VISITORCOUNTER_TMP_ID}#${LEANCLOUD_VISITORCOUNTER_ID}#g" _config.yml
   # 修改主题配置配置文件里LeanCloud Counter的App ID的信息
-  - sed -i "s#${LEANCLOUD_VISITORCOUNTER_TMP_ID}#${LEANCLOUD_VISITORCOUNTER_ID}#g" themes/next/_config.yml
+  #- sed -i "s#${LEANCLOUD_VISITORCOUNTER_TMP_ID}#${LEANCLOUD_VISITORCOUNTER_ID}#g" themes/next/_config.yml
 
   - "git ls-files -z | while read -d '' path; do touch -d \"$(git log -1 --format=\"@%ct\" \"$path\")\" \"$path\"; done"
   - "git clone --branch=master --single-branch https://${GITHUB_REPO}.git .deploy_git"

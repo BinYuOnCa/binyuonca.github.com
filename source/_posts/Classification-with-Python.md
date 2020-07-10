@@ -12,14 +12,24 @@ date: 2020-07-08 17:11:50
 Date: 2020-06-07 00:00:00
 ---
 
-In this notebook we try to practice all the classification algorithms that we learned in this course.
+This is my assignment of final project of [IBM online course Machine Learning with Python](https://www.coursera.org/learn/machine-learning-with-python/home/welcome) via Coursera.
 
-We load a dataset using Pandas library, and apply the following algorithms, and find the best one for this specific dataset by accuracy evaluation methods.
+In this notebook we will build a classifier to predict whether a loan case will be paid off or not.
+
+We will load a historical dataset from previous loan applications, clean the data, and apply different classification algorithm on the data.
+
+The following algorithms are expected to build the models:
 
 - K Nearest Neibhbor (KNN)
 - Decision Tree (DT)
 - Support Vector Machine (SVM)
 - Logistic Regression (LR)
+
+The results is reported as the accuracy of each classifier, using the following metrics when these are applicable:
+
+- Jaccard index
+- F1-score
+- LogLoass
 
 <!-- more -->
 

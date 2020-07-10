@@ -48,4 +48,4 @@ language: node_js
 node_js: stable
 script: 
   - "hexo g"
-  - "hexo d"
+  #- "hexo d"

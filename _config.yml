@@ -111,7 +111,13 @@ deploy:
   repo: https://github.com/BinYuOnCa/binyuonca.github.com.git
   #repo: git@github.com:BinYuOnCa/binyuonca.github.com.git
   branch: master
-  message: "Message in Homepage/_config.yml"
+  name: BinYuOnCa
+  email: yubin.on.ca@gmail.com
+  token: d12fa76eaeb882bf51fcde4fcc2725002526835b
+  #07ee99afebd067c6b418141e7dd7737791f54a83
+  #${GITHUB_TOKEN}
+  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
+
 -  
   type: leancloud_counter_security_sync
         

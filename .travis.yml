@@ -14,7 +14,7 @@ before_install:
   # 修改主题配置配置文件里LeanCloud Counter的App ID的信息
   - sed -i "s#${LEANCLOUD_VISITORCOUNTER_TMP_ID}#${LEANCLOUD_VISITORCOUNTER_ID}#g" themes/next/_config.yml
 
-  - "git ls-files -z | while read -d '' path; do touch -d \"$(git log -l --format=\"@%ct\" \"$path\")\" \"$path\"; done"
+  - "git ls-files -z | while read -d '' path; do touch -d \"$(git log -1 --format=\"@%ct\" \"$path\")\" \"$path\"; done"
   - "git clone --branch=master --single-branch https://${GITHUB_REPO}.git .deploy_git"
 
 before_script: 

@@ -14,12 +14,14 @@ before_install:
   # 修改主题配置配置文件里LeanCloud Counter的App ID的信息
   - sed -i "s#${LEANCLOUD_VISITORCOUNTER_TMP_ID}#${LEANCLOUD_VISITORCOUNTER_ID}#g" themes/next/_config.yml
 
-
-
-  - "git ls-files -z | while read -d '' path; do touch -d \"$(git log -l -- format=\"@%ct\" \"$path\")\" \"$path\"; done"
+  - "git ls-files -z | while read -d '' path; do touch -d \"$(git log -l --format=\"@%ct\" \"$path\")\" \"$path\"; done"
   - "git clone --branch=master --single-branch https://${GITHUB_REPO}.git .deploy_git"
+
 before_script: 
   - "hexo clean"
+git: 
+  depth: false
+
 branches: 
   only: 
     - pg-source
@@ -32,8 +34,7 @@ env:
   - secure: "Oh7JAm/I9+JL+hVSfBIXBxB8LhaHxTfFWxtUgfyXAZLMTAxleUoBNBKd5d3FVX34c6j/JGdlITZEbc1p9sfM2j+aQoIdMZ2M7F56Vf22q25XCVG2niwtEvoWKMLgo+bcbxuW/FEXcDhuIZ7k4dJh5dzbTB5uRdgWFNJtd2IV57nLv/EwUvm7JVXgkc0eiRn5DyXJT0yBVWsQeHDsUrlIGRAZmTFauwr0wpnyOAaBbTHvwGebkOQNDl+e0AzvLWFuxjopuUk1iXSa2ItDAKyKTT5VjkwXMOX3NkwBfchHqK1jwLUqiB5ixJzVRPqLxGOnQRZR87GS7ziYrtGvQCn5JRKtAm48hKGe/NL3OxfBb0uc0K9BanjAkbVcPFuNCUd3ulJ3J7XQdKteq5vX+AjrWxU+Cb1EpFf9rDIAEzNoTx3mipFqA0b7Vu8U9Q2JhrqhIh7NHu7Zy7I8/dNWfO51wC8yNTkE/Pdk8NykuVZnP2A77zf+T4SQAwwhJCUcQ7tLUgFRt49QQ9OuCV0NojJwMN7AUJIkXM3+JHhP8lxm3ps2jjJQF30IQXaq7h6YDqJ+xE/wOwlkktyO3Ayt+ic7NrGXDsGLlatNz6fMeuB+9sHdYlv1C2B6FIEdubIoJboE/N8KvcM0nCMKd/Bcb5+nAGh+Are8oVaM/Q/8f2xocIE="
   - secure: "UlC7SpONPH5cLoUhyKfRO7BHma2Wic3jgkVEZk4dKfAMclPm3qG1NT2pRvTdGboD+n9UtMW8U3am4JG0lpt8tG1SBl4R1rUVj2ayGxkX9r9VJAZvIKQNb/SIkdXT2ykZgE9bvgrGxhvLQc04GxbR184hoe53AiSoi/J3Gx7wA82+4UVDJDrIzAB3LOFPNUUizLjjnyyvkQX981zb8C7X5fjH3+XhiDoJiDEjN14HCpwDZn0pyy7Vbcqs7z6+pA/UaFqTPlmGRNeiy1X6vS5i3fjwR+ucrQLgzuBgjRD/o+7x5WIPhhbnQB86myJRmpqMDxu1Ap9LJejtKbUQ6F0eeMBDTh71l8ueCRvJNNAxJbjZMjP1CWZ9vYXde4VRwEPys6TANy5xbxj4V4VYuI0lolqdbkosmquQ2+j779IjR5wzAvXOHeX7n7TtFWl5bqk/VnaLIN65RNm6XLV6Lwqf88N+0Zs2HdX7sv9mZUxLDqt3LeyJc7emiTRiE5LEmrJjk+uOizkAHphUc0fwSHKSDeeq5f1uby9qXPD8MtIhKrguvcOmOngl6SJ8ruFT9Y+qFdiyZC5At/mz6AYox3+pxEFZD5MYLMX2n8pHtMnCS6Rc+V6B5KqHN5D3yvA4TdjNaeCC2DmxvF++xEqZDdptjB0fS4U8jBrPCYUqQeBpBBY="
     
-    git: 
-  depth: false
+
 install: 
   - npm install babel-runtime@6
   - npm install -g hexo-cli

@@ -1,8 +1,10 @@
 deploy:
   provider: pages 
-  cleanup: true
-  token: $GITHUB_TOKEN 
+  skip-cleanup: true
+  github_token: $GITHUB_TOKEN 
   keep_history: true
+  local-dir: public 
+    
 
 before_install: 
   - "git config --global user.name \"Bin Yu\""
@@ -46,4 +48,4 @@ language: node_js
 node_js: stable
 script: 
   - "hexo g"
-  - "hexo d"
+#  - "hexo d"

@@ -108,7 +108,8 @@ theme: next
 deploy:
 -
   type: git
-  repo: https://github.com/BinYuOnCa/binyuonca.github.com.git
+  #repo: https://github.com/BinYuOnCa/binyuonca.github.com.git
+  repo: git@github.com:BinYuOnCa/binyuonca.github.com.git
   branch: master
   message: "Message in Homepage/_config.yml"
 -  

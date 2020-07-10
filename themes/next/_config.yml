@@ -612,7 +612,7 @@ changyan:
 # Valine
 # For more information: https://valine.js.org, https://github.com/xCss/Valine
 valine:
-  enable: true
+  enable: ture
   appid: xAbyCllSgFTWSsFRMXGpWyb3-MdYXbMMI
   appkey: FdlB5jPO98iemWpRJPcK4Rpc
   notify: false # Mail notifier
@@ -627,6 +627,7 @@ valine:
   recordIP: false # Whether to record the commenter IP
   serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)
   #post_meta_order: 0
+  visiter: false
 
 # LiveRe comments system
 # You can get your uid from https://livere.com/insight/myCode (General web site)
@@ -693,8 +694,8 @@ cnzz_siteid:
 # Do not enable both `valine.visitor` and `leancloud_visitors`.
 leancloud_visitors:
   enable: true
-  app_id: ejiGxeycbXDtKDB0eLd0TOvx-MdYXbMMI
-  app_key: lNbbwMxW4v0L1xbOm5fMH2SM
+  app_id: PFfDnND4aRCqfyvyNs3I5zeB-MdYXbMMI
+  app_key: SmRgM6YQLDJp6vPh8lddYsDQ
   # Required for apps from CN region
   server_url: # <your server url>
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security

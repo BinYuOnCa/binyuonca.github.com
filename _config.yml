@@ -94,10 +94,27 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 leancloud_counter_security:
   enable_sync: true
-  app_id: ejiGxeycbXDtKDB0eLd0TOvx-MdYXbMMI
-  app_key: lNbbwMxW4v0L1xbOm5fMH2SM
-  username: ben-hexo-lc 
-  password: bXDtKDB0eLNbbwMxW4v
+
+  app_id: PFfDnND4aRCqfyvyNs3I5zeB-MdYXbMMI
+  #${LEANCLOUD_VISITORS_ID}
+  app_key: SmRgM6YQLDJp6vPh8lddYsDQ
+  #${LEANCLOUD_VISITORS_KEY}
+
+
+  username: ben-hexo-counter
+  password: sZtq7SgMnmkymf3RCqfyvyNs3I
+
+
+  #username: ${LEANCLOUD_USER_ID}
+  #password: ${LEANCLOUD_COUNTER_PWD}
+
+  #server_url: https://leancloud.cn
+
+  #app_id: ejiGxeycbXDtKDB0eLd0TOvx-MdYXbMMI
+  #app_key: lNbbwMxW4v0L1xbOm5fMH2SM
+  #username: ben-hexo-lc 
+  #password: $LEANCLOUD_COUNTER_PWD
+  # bXDtKDB0eLNbbwMxW4v
 
 
 ## Themes: https://hexo.io/themes/
@@ -108,10 +125,15 @@ theme: next
 deploy:
 -
   type: git
-  repo: https://github.com/BinYuOnCa/binyuonca.github.com.git
-  #repo: git@github.com:BinYuOnCa/binyuonca.github.com.git
+  #repo: https://github.com/BinYuOnCa/binyuonca.github.com.git
+  repo: git@github.com:BinYuOnCa/binyuonca.github.com.git
   branch: master
-  message: "Message in Homepage/_config.yml"
+  name: BinYuOnCa
+  email: yubin.on.ca@gmail.com
+  token: d12fa76eaeb882bf51fcde4fcc2725002526835b
+  #07ee99afebd067c6b418141e7dd7737791f54a83
+  #${GITHUB_TOKEN}
+  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
 -  
   type: leancloud_counter_security_sync
         

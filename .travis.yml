@@ -1,9 +1,10 @@
+
 deploy:
   provider: pages 
-  skip-cleanup: true
-  github_token: $GITHUB_TOKEN 
+  skip_cleanup: true
+  token: $GITHUB_TOKEN 
   keep_history: true
-  local-dir: public 
+  local_dir: public 
     
 
 before_install: 

@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-10 17:45:46" itemprop="dateModified" datetime="2020-07-10T17:45:46-04:00">2020-07-10</time>
+                <time title="Modified: 2020-07-13 00:38:32" itemprop="dateModified" datetime="2020-07-13T00:38:32-04:00">2020-07-13</time>
               </span>
 
           
@@ -228,21 +228,19 @@
 
       
           <p>This is my assignment of final project of <a href="https://www.coursera.org/learn/machine-learning-with-python/home/welcome" target="_blank" rel="noopener">IBM online course Machine Learning with Python</a> via Coursera.</p>
-<p>In this notebook we will build a classifier to predict whether a loan case will be paid off or not.</p>
-<p>We will load a historical dataset from previous loan applications, clean the data, and apply different classification algorithm on the data.</p>
-<p>The following algorithms are expected to build the models:</p>
-<ul>
-<li>K Nearest Neibhbor (KNN)</li>
-<li>Decision Tree (DT)</li>
-<li>Support Vector Machine (SVM)</li>
-<li>Logistic Regression (LR)</li>
-</ul>
-<p>The results is reported as the accuracy of each classifier, using the following metrics when these are applicable:</p>
-<ul>
-<li>Jaccard index</li>
-<li>F1-score</li>
-<li>LogLoass</li>
-</ul>
+<p>In this notebook we will build a classifier to predict whether a loan case will be paid off or not. We will load a historical dataset from previous loan applications, clean the data, and apply different classification algorithm on the data. The results is reported as the accuracy of each classifier, using the following metrics when these are applicable.</p>
+<table>
+<thead>
+<tr>
+<th>Algorithms</th>
+<th>Evaluation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>K Nearest Neibhbor (KNN) <br> Decision Tree (DT) <br> Support Vector Machine (SVM) <br> Logistic Regression (LR)</td>
+<td>Jaccard index <br>F1-score <br> LogLoass</td>
+</tr>
+</tbody></table>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/07/08/Classification-with-Python/#more" rel="contents">
@@ -518,9 +516,14 @@
                 console.error('Failed to save visitor count', error);
               });
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
@@ -547,7 +550,7 @@
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"PFfDnND4aRCqfyvyNs3I5zeB-MdYXbMMI","app_key":"SmRgM6YQLDJp6vPh8lddYsDQ","server_url":null,"security":true,"betterPerformance":false};
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"PFfDnND4aRCqfyvyNs3I5zeB-MdYXbMMI","app_key":"SmRgM6YQLDJp6vPh8lddYsDQ","server_url":null,"security":false,"betterPerformance":false};
     function fetchData(api_server) {
       var Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {

@@ -27,14 +27,13 @@
 <meta property="og:site_name" content="From Backend Engineer to Data Scientist">
 <meta property="og:description" content="This is my assignment of final project of IBM online course Machine Learning with Python via Coursera. In this notebook we will build a classifier to predict whether a loan case will be paid off or no">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://ibm.box.com/shared/static/cw2c7r3o20w9zn8gkecaeyjhgw3xdgbj.png">
 <meta property="og:image" content="https://binyuonca.github.io/2020/07/08/Classification-with-Python/output_19_0.png">
 <meta property="og:image" content="https://binyuonca.github.io/2020/07/08/Classification-with-Python/output_20_0.png">
 <meta property="og:image" content="https://binyuonca.github.io/2020/07/08/Classification-with-Python/output_23_0.png">
 <meta property="og:image" content="https://binyuonca.github.io/2020/07/08/Classification-with-Python/output_57_0.png">
 <meta property="og:image" content="https://binyuonca.github.io/2020/07/08/Classification-with-Python/loanTree.png">
 <meta property="article:published_time" content="2020-07-08T21:11:50.000Z">
-<meta property="article:modified_time" content="2020-07-10T21:45:46.009Z">
+<meta property="article:modified_time" content="2020-07-13T04:38:32.100Z">
 <meta property="article:author" content="Bin Yu">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Classification">
@@ -42,7 +41,7 @@
 <meta property="article:tag" content="seaborn">
 <meta property="article:tag" content="Coursera">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ibm.box.com/shared/static/cw2c7r3o20w9zn8gkecaeyjhgw3xdgbj.png">
+<meta name="twitter:image" content="https://binyuonca.github.io/2020/07/08/Classification-with-Python/output_19_0.png">
 
 <link rel="canonical" href="https://binyuonca.github.io/2020/07/08/Classification-with-Python/">
 
@@ -208,7 +207,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-10 17:45:46" itemprop="dateModified" datetime="2020-07-10T17:45:46-04:00">2020-07-10</time>
+                <time title="Modified: 2020-07-13 00:38:32" itemprop="dateModified" datetime="2020-07-13T00:38:32-04:00">2020-07-13</time>
               </span>
 
           
@@ -244,26 +243,22 @@
 
       
         <p>This is my assignment of final project of <a href="https://www.coursera.org/learn/machine-learning-with-python/home/welcome" target="_blank" rel="noopener">IBM online course Machine Learning with Python</a> via Coursera.</p>
-<p>In this notebook we will build a classifier to predict whether a loan case will be paid off or not.</p>
-<p>We will load a historical dataset from previous loan applications, clean the data, and apply different classification algorithm on the data.</p>
-<p>The following algorithms are expected to build the models:</p>
-<ul>
-<li>K Nearest Neibhbor (KNN)</li>
-<li>Decision Tree (DT)</li>
-<li>Support Vector Machine (SVM)</li>
-<li>Logistic Regression (LR)</li>
-</ul>
-<p>The results is reported as the accuracy of each classifier, using the following metrics when these are applicable:</p>
-<ul>
-<li>Jaccard index</li>
-<li>F1-score</li>
-<li>LogLoass</li>
-</ul>
+<p>In this notebook we will build a classifier to predict whether a loan case will be paid off or not. We will load a historical dataset from previous loan applications, clean the data, and apply different classification algorithm on the data. The results is reported as the accuracy of each classifier, using the following metrics when these are applicable.</p>
+<table>
+<thead>
+<tr>
+<th>Algorithms</th>
+<th>Evaluation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>K Nearest Neibhbor (KNN) <br> Decision Tree (DT) <br> Support Vector Machine (SVM) <br> Logistic Regression (LR)</td>
+<td>Jaccard index <br>F1-score <br> LogLoass</td>
+</tr>
+</tbody></table>
 <a id="more"></a>
 
-<p><a href="https://www.bigdatauniversity.com" target="_blank" rel="noopener"><img src="https://ibm.box.com/shared/static/cw2c7r3o20w9zn8gkecaeyjhgw3xdgbj.png" width="400" align="center"></a></p>
-<h1 align="center"><font size="5">Classification with Python</font></h1>
-
+<p><strong>Table of Contents</strong></p>
 <ul>
 <li><a href="#1-environment-and-dataset">1. Environment and Dataset</a><ul>
 <li><a href="#11-about-dataset">1.1. About dataset</a></li>
@@ -2165,7 +2160,7 @@ LogisticRegression    Jaccard index: 0.74
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">Classification with Python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Environment-and-Dataset"><span class="nav-number">2.</span> <span class="nav-text">1. Environment and Dataset</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-About-dataset"><span class="nav-number">2.1.</span> <span class="nav-text">1.1. About dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Load-Data-From-CSV-File"><span class="nav-number">2.2.</span> <span class="nav-text">1.2. Load Data From CSV File</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Convert-to-date-time-object"><span class="nav-number">2.3.</span> <span class="nav-text">1.3. Convert to date time object</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Pre-processing-with-Data-visualization"><span class="nav-number">3.</span> <span class="nav-text">2. Pre-processing with Data visualization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Visulaition-the-data"><span class="nav-number">3.1.</span> <span class="nav-text">2.1. Visulaition the data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Categorical-Encoding"><span class="nav-number">3.2.</span> <span class="nav-text">2.2. Categorical Encoding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Gender"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1. Gender</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Education"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.2. Education</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Feature-selection"><span class="nav-number">3.3.</span> <span class="nav-text">2.3. Feature selection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Normalize-Data"><span class="nav-number">3.4.</span> <span class="nav-text">2.4. Normalize Data</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Classification"><span class="nav-number">4.</span> <span class="nav-text">3. Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-K-Nearest-Neighbor-KNN"><span class="nav-number">4.1.</span> <span class="nav-text">3.1. K Nearest Neighbor(KNN)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Decision-Tree"><span class="nav-number">4.2.</span> <span class="nav-text">3.2. Decision Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Support-Vector-Machine"><span class="nav-number">4.3.</span> <span class="nav-text">3.3. Support Vector Machine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-Logistic-Regression"><span class="nav-number">4.4.</span> <span class="nav-text">3.4. Logistic Regression</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Model-Evaluation-using-Test-Data-Set"><span class="nav-number">5.</span> <span class="nav-text">4. Model Evaluation using Test Data Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Load-Test-Data-Set-for-Evaluation"><span class="nav-number">5.1.</span> <span class="nav-text">4.1. Load Test Data Set for Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Pre-processing-Test-Data-Set"><span class="nav-number">5.2.</span> <span class="nav-text">4.2. Pre-processing Test Data Set</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Summary"><span class="nav-number">6.</span> <span class="nav-text">5. Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">6.1.</span> <span class="nav-text">Want to learn more?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">6.1.1.</span> <span class="nav-text">Thanks for completing this lesson!</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">Author:  Saeed Aghabozorgi</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Environment-and-Dataset"><span class="nav-number">1.</span> <span class="nav-text">1. Environment and Dataset</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-About-dataset"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. About dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Load-Data-From-CSV-File"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. Load Data From CSV File</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Convert-to-date-time-object"><span class="nav-number">1.3.</span> <span class="nav-text">1.3. Convert to date time object</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Pre-processing-with-Data-visualization"><span class="nav-number">2.</span> <span class="nav-text">2. Pre-processing with Data visualization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Visulaition-the-data"><span class="nav-number">2.1.</span> <span class="nav-text">2.1. Visulaition the data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Categorical-Encoding"><span class="nav-number">2.2.</span> <span class="nav-text">2.2. Categorical Encoding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Gender"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1. Gender</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Education"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2. Education</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Feature-selection"><span class="nav-number">2.3.</span> <span class="nav-text">2.3. Feature selection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Normalize-Data"><span class="nav-number">2.4.</span> <span class="nav-text">2.4. Normalize Data</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Classification"><span class="nav-number">3.</span> <span class="nav-text">3. Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-K-Nearest-Neighbor-KNN"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. K Nearest Neighbor(KNN)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Decision-Tree"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. Decision Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Support-Vector-Machine"><span class="nav-number">3.3.</span> <span class="nav-text">3.3. Support Vector Machine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-Logistic-Regression"><span class="nav-number">3.4.</span> <span class="nav-text">3.4. Logistic Regression</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Model-Evaluation-using-Test-Data-Set"><span class="nav-number">4.</span> <span class="nav-text">4. Model Evaluation using Test Data Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Load-Test-Data-Set-for-Evaluation"><span class="nav-number">4.1.</span> <span class="nav-text">4.1. Load Test Data Set for Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Pre-processing-Test-Data-Set"><span class="nav-number">4.2.</span> <span class="nav-text">4.2. Pre-processing Test Data Set</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Summary"><span class="nav-number">5.</span> <span class="nav-text">5. Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">Want to learn more?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.1.1.</span> <span class="nav-text">Thanks for completing this lesson!</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">Author:  Saeed Aghabozorgi</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -2264,9 +2259,14 @@ LogisticRegression    Jaccard index: 0.74
                 console.error('Failed to save visitor count', error);
               });
           } else {
-              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
-              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
-            
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
           }
         })
         .catch(error => {
@@ -2293,7 +2293,7 @@ LogisticRegression    Jaccard index: 0.74
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"PFfDnND4aRCqfyvyNs3I5zeB-MdYXbMMI","app_key":"SmRgM6YQLDJp6vPh8lddYsDQ","server_url":null,"security":true,"betterPerformance":false};
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"PFfDnND4aRCqfyvyNs3I5zeB-MdYXbMMI","app_key":"SmRgM6YQLDJp6vPh8lddYsDQ","server_url":null,"security":false,"betterPerformance":false};
     function fetchData(api_server) {
       var Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {

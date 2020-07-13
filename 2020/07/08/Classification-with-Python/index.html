@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://binyuonca.github.io/2020/07/08/Classification-with-Python/output_57_0.png">
 <meta property="og:image" content="https://binyuonca.github.io/2020/07/08/Classification-with-Python/loanTree.png">
 <meta property="article:published_time" content="2020-07-08T21:11:50.000Z">
-<meta property="article:modified_time" content="2020-07-13T04:38:32.100Z">
+<meta property="article:modified_time" content="2020-07-13T05:00:27.635Z">
 <meta property="article:author" content="Bin Yu">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Classification">
@@ -207,7 +207,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-13 00:38:32" itemprop="dateModified" datetime="2020-07-13T00:38:32-04:00">2020-07-13</time>
+                <time title="Modified: 2020-07-13 01:00:27" itemprop="dateModified" datetime="2020-07-13T01:00:27-04:00">2020-07-13</time>
               </span>
 
           
@@ -260,33 +260,33 @@
 
 <p><strong>Table of Contents</strong></p>
 <ul>
-<li><a href="#1-environment-and-dataset">1. Environment and Dataset</a><ul>
-<li><a href="#11-about-dataset">1.1. About dataset</a></li>
-<li><a href="#12-load-data-from-csv-file">1.2. Load Data From CSV File</a></li>
-<li><a href="#13-convert-to-date-time-object">1.3. Convert to date time object</a></li>
+<li><a href="#1-Environment-And-Dataset">1. Environment And Dataset</a><ul>
+<li><a href="#1-1-About-Dataset">1.1. About Dataset</a></li>
+<li><a href="#1-2-Load-Data-From-Csv-File">1.2. Load Data From CSV File</a></li>
+<li><a href="#1-3-Convert-To-Date-Time-Object">1.3. Convert To Date Time Object</a></li>
 </ul>
 </li>
-<li><a href="#2-pre-processing-with-data-visualization">2. Pre-processing with Data visualization</a><ul>
-<li><a href="#21-visulaition-the-data">2.1. Visulaition the data</a></li>
-<li><a href="#22-categorical-encoding">2.2. Categorical Encoding</a><ul>
-<li><a href="#221-gender">2.2.1. Gender</a></li>
-<li><a href="#222-education">2.2.2. Education</a></li>
+<li><a href="#2-Pre-processing-With-Data-Visualization">2. Pre-processing With Data Visualization</a><ul>
+<li><a href="#2-1-Visulaition-The-Data">2.1. Visulaition The Data</a></li>
+<li><a href="#2-2-Categorical---Encoding">2.2. Categorical Encoding</a><ul>
+<li><a href="#2-2-1-Gender">2.2.1. Gender</a>-</li>
+<li><a href="#2-2-2-Education">2.2.2. Education</a></li>
 </ul>
 </li>
-<li><a href="#23-feature-selection">2.3. Feature selection</a></li>
-<li><a href="#24-normalize-data">2.4. Normalize Data</a></li>
+<li><a href="#2-3-Feature-Selection">2.3. Feature Selection</a></li>
+<li><a href="#2-4-Normalize-Data">2.4. Normalize Data</a></li>
 </ul>
 </li>
-<li><a href="#3-classification">3. Classification</a><ul>
-<li><a href="#31-k-nearest-neighborknn">3.1. K Nearest Neighbor(KNN)</a></li>
-<li><a href="#32-decision-tree">3.2. Decision Tree</a></li>
-<li><a href="#33-support-vector-machine">3.3. Support Vector Machine</a></li>
-<li><a href="#34-logistic-regression">3.4. Logistic Regression</a></li>
+<li><a href="#3-Classification">3. Classification</a><ul>
+<li><a href="#3-1-K-Nearest-Neighborknn">3.1. K Nearest Neighbor(KNN)</a></li>
+<li><a href="#3-2-Decision-Tree">3.2. Decision Tree</a></li>
+<li><a href="#3-3-Support-Vector-Machine">3.3. Support Vector Machine</a></li>
+<li><a href="#3-4-Logistic-Regression">3.4. Logistic Regression</a></li>
 </ul>
 </li>
-<li><a href="#4-model-evaluation-using-test-data-set">4. Model Evaluation using Test Data Set</a><ul>
-<li><a href="#41-load-test-data-set-for-evaluation">4.1. Load Test Data Set for Evaluation</a></li>
-<li><a href="#42-pre-processing-test-data-set">4.2. Pre-processing Test Data Set</a></li>
+<li><a href="#4-Model-Evaluation-Using-Test-Data-Set">4. Model Evaluation Using Test Data Set</a><ul>
+<li><a href="#4-1-Load-Test-Data-Set-For-Evaluation">4.1. Load Test Data Set For Evaluation</a></li>
+<li><a href="#4-2-Pre-processing-Test-Data-Set">4.2. Pre-processing Test Data Set</a></li>
 </ul>
 </li>
 <li><a href="#5-summary">5. Summary</a></li>
@@ -299,10 +299,10 @@
 <li>Support Vector Machine (SVM)</li>
 <li>Logistic Regression (LR)</li>
 </ul>
-<h1 id="1-Environment-and-Dataset"><a href="#1-Environment-and-Dataset" class="headerlink" title="1. Environment and Dataset"></a>1. Environment and Dataset</h1><p>Lets first load required libraries:</p>
+<h1 id="1-Environment-And-Dataset"><a href="#1-Environment-And-Dataset" class="headerlink" title="1. Environment And Dataset"></a>1. Environment And Dataset</h1><p>Lets first load required libraries:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib.ticker <span class="keyword">import</span> NullFormatter</span><br><span class="line"><span class="keyword">import</span> matplotlib.ticker <span class="keyword">as</span> ticker</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">'ignore'</span>)</span><br><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-1-About-dataset"><a href="#1-1-About-dataset" class="headerlink" title="1.1. About dataset"></a>1.1. About dataset</h2><p>This dataset is about past loans. The <strong>Loan_train.csv</strong> data set includes details of 346 customers whose loan are already paid off or defaulted. It includes following fields:</p>
+<h2 id="1-1-About-Dataset"><a href="#1-1-About-Dataset" class="headerlink" title="1.1. About Dataset"></a>1.1. About Dataset</h2><p>This dataset is about past loans. The <strong>Loan_train.csv</strong> data set includes details of 346 customers whose loan are already paid off or defaulted. It includes following fields:</p>
 <table>
 <thead>
 <tr>
@@ -457,7 +457,7 @@
 
 
 
-<pre><code>(346, 10)</code></pre><h2 id="1-3-Convert-to-date-time-object"><a href="#1-3-Convert-to-date-time-object" class="headerlink" title="1.3. Convert to date time object"></a>1.3. Convert to date time object</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'due_date'</span>] = pd.to_datetime(df[<span class="string">'due_date'</span>])</span><br><span class="line">df[<span class="string">'effective_date'</span>] = pd.to_datetime(df[<span class="string">'effective_date'</span>])</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<pre><code>(346, 10)</code></pre><h2 id="1-3-Convert-To-Date-Time-Object"><a href="#1-3-Convert-To-Date-Time-Object" class="headerlink" title="1.3. Convert To Date Time Object"></a>1.3. Convert To Date Time Object</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'due_date'</span>] = pd.to_datetime(df[<span class="string">'due_date'</span>])</span><br><span class="line">df[<span class="string">'effective_date'</span>] = pd.to_datetime(df[<span class="string">'effective_date'</span>])</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
 
 
 
@@ -563,9 +563,9 @@
 
 
 
-<h1 id="2-Pre-processing-with-Data-visualization"><a href="#2-Pre-processing-with-Data-visualization" class="headerlink" title="2. Pre-processing with Data visualization"></a>2. Pre-processing with Data visualization</h1><p>Libs used in this section.</p>
+<h1 id="2-Pre-processing-With-Data-Visualization"><a href="#2-Pre-processing-With-Data-Visualization" class="headerlink" title="2. Pre-processing With Data Visualization"></a>2. Pre-processing With Data Visualization</h1><p>Libs used in this section.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br></pre></td></tr></table></figure>
-<h2 id="2-1-Visulaition-the-data"><a href="#2-1-Visulaition-the-data" class="headerlink" title="2.1. Visulaition the data"></a>2.1. Visulaition the data</h2><p>Let’s see how many of each class is in our data set </p>
+<h2 id="2-1-Visulaition-The-Data"><a href="#2-1-Visulaition-The-Data" class="headerlink" title="2.1. Visulaition The Data"></a>2.1. Visulaition The Data</h2><p>Let’s see how many of each class is in our data set </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">'loan_status'</span>].value_counts()</span><br></pre></td></tr></table></figure>
 
 
@@ -1285,7 +1285,7 @@ Name: loan_status, dtype: float64</code></pre><p><strong>Befor One Hot Encoding<
 
 
 
-<h2 id="2-3-Feature-selection"><a href="#2-3-Feature-selection" class="headerlink" title="2.3. Feature selection"></a>2.3. Feature selection</h2><p>Lets defind feature sets, X:</p>
+<h2 id="2-3-Feature-Selection"><a href="#2-3-Feature-Selection" class="headerlink" title="2.3. Feature Selection"></a>2.3. Feature Selection</h2><p>Lets defind feature sets, X:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X = Feature</span><br><span class="line">X[<span class="number">0</span>:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
 
 
@@ -1494,11 +1494,11 @@ __ Notice:__
 
 
 
-<pre><code>0.6857142857142857</code></pre><h1 id="4-Model-Evaluation-using-Test-Data-Set"><a href="#4-Model-Evaluation-using-Test-Data-Set" class="headerlink" title="4. Model Evaluation using Test Data Set"></a>4. Model Evaluation using Test Data Set</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> jaccard_similarity_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> f1_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> log_loss</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> jaccard_score</span><br></pre></td></tr></table></figure>
+<pre><code>0.6857142857142857</code></pre><h1 id="4-Model-Evaluation-Using-Test-Data-Set"><a href="#4-Model-Evaluation-Using-Test-Data-Set" class="headerlink" title="4. Model Evaluation Using Test Data Set"></a>4. Model Evaluation Using Test Data Set</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> jaccard_similarity_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> f1_score</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> log_loss</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> jaccard_score</span><br></pre></td></tr></table></figure>
 
 <p>First, download and load the test set:</p>
 <p>!wget -O loan_test.csv <a href="https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_test.csv" target="_blank" rel="noopener">https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_test.csv</a></p>
-<h2 id="4-1-Load-Test-Data-Set-for-Evaluation"><a href="#4-1-Load-Test-Data-Set-for-Evaluation" class="headerlink" title="4.1. Load Test Data Set for Evaluation"></a>4.1. Load Test Data Set for Evaluation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_df = pd.read_csv(<span class="string">'loan_test.csv'</span>)</span><br><span class="line">test_df.head()</span><br></pre></td></tr></table></figure>
+<h2 id="4-1-Load-Test-Data-Set-For-Evaluation"><a href="#4-1-Load-Test-Data-Set-For-Evaluation" class="headerlink" title="4.1. Load Test Data Set For Evaluation"></a>4.1. Load Test Data Set For Evaluation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test_df = pd.read_csv(<span class="string">'loan_test.csv'</span>)</span><br><span class="line">test_df.head()</span><br></pre></td></tr></table></figure>
 
 
 
@@ -2160,7 +2160,7 @@ LogisticRegression    Jaccard index: 0.74
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Environment-and-Dataset"><span class="nav-number">1.</span> <span class="nav-text">1. Environment and Dataset</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-About-dataset"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. About dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Load-Data-From-CSV-File"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. Load Data From CSV File</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Convert-to-date-time-object"><span class="nav-number">1.3.</span> <span class="nav-text">1.3. Convert to date time object</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Pre-processing-with-Data-visualization"><span class="nav-number">2.</span> <span class="nav-text">2. Pre-processing with Data visualization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Visulaition-the-data"><span class="nav-number">2.1.</span> <span class="nav-text">2.1. Visulaition the data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Categorical-Encoding"><span class="nav-number">2.2.</span> <span class="nav-text">2.2. Categorical Encoding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Gender"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1. Gender</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Education"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2. Education</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Feature-selection"><span class="nav-number">2.3.</span> <span class="nav-text">2.3. Feature selection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Normalize-Data"><span class="nav-number">2.4.</span> <span class="nav-text">2.4. Normalize Data</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Classification"><span class="nav-number">3.</span> <span class="nav-text">3. Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-K-Nearest-Neighbor-KNN"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. K Nearest Neighbor(KNN)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Decision-Tree"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. Decision Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Support-Vector-Machine"><span class="nav-number">3.3.</span> <span class="nav-text">3.3. Support Vector Machine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-Logistic-Regression"><span class="nav-number">3.4.</span> <span class="nav-text">3.4. Logistic Regression</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Model-Evaluation-using-Test-Data-Set"><span class="nav-number">4.</span> <span class="nav-text">4. Model Evaluation using Test Data Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Load-Test-Data-Set-for-Evaluation"><span class="nav-number">4.1.</span> <span class="nav-text">4.1. Load Test Data Set for Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Pre-processing-Test-Data-Set"><span class="nav-number">4.2.</span> <span class="nav-text">4.2. Pre-processing Test Data Set</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Summary"><span class="nav-number">5.</span> <span class="nav-text">5. Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">Want to learn more?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.1.1.</span> <span class="nav-text">Thanks for completing this lesson!</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">Author:  Saeed Aghabozorgi</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Environment-And-Dataset"><span class="nav-number">1.</span> <span class="nav-text">1. Environment And Dataset</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-About-Dataset"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. About Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Load-Data-From-CSV-File"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. Load Data From CSV File</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-Convert-To-Date-Time-Object"><span class="nav-number">1.3.</span> <span class="nav-text">1.3. Convert To Date Time Object</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Pre-processing-With-Data-Visualization"><span class="nav-number">2.</span> <span class="nav-text">2. Pre-processing With Data Visualization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Visulaition-The-Data"><span class="nav-number">2.1.</span> <span class="nav-text">2.1. Visulaition The Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Categorical-Encoding"><span class="nav-number">2.2.</span> <span class="nav-text">2.2. Categorical Encoding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-Gender"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1. Gender</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Education"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2. Education</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Feature-Selection"><span class="nav-number">2.3.</span> <span class="nav-text">2.3. Feature Selection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Normalize-Data"><span class="nav-number">2.4.</span> <span class="nav-text">2.4. Normalize Data</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Classification"><span class="nav-number">3.</span> <span class="nav-text">3. Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-K-Nearest-Neighbor-KNN"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. K Nearest Neighbor(KNN)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Decision-Tree"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. Decision Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Support-Vector-Machine"><span class="nav-number">3.3.</span> <span class="nav-text">3.3. Support Vector Machine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-Logistic-Regression"><span class="nav-number">3.4.</span> <span class="nav-text">3.4. Logistic Regression</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Model-Evaluation-Using-Test-Data-Set"><span class="nav-number">4.</span> <span class="nav-text">4. Model Evaluation Using Test Data Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Load-Test-Data-Set-For-Evaluation"><span class="nav-number">4.1.</span> <span class="nav-text">4.1. Load Test Data Set For Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Pre-processing-Test-Data-Set"><span class="nav-number">4.2.</span> <span class="nav-text">4.2. Pre-processing Test Data Set</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Summary"><span class="nav-number">5.</span> <span class="nav-text">5. Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">5.1.</span> <span class="nav-text">Want to learn more?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.1.1.</span> <span class="nav-text">Thanks for completing this lesson!</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">Author:  Saeed Aghabozorgi</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

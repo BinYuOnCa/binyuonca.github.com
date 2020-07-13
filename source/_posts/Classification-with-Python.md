@@ -14,50 +14,41 @@ Date: 2020-06-07 00:00:00
 
 This is my assignment of final project of [IBM online course Machine Learning with Python](https://www.coursera.org/learn/machine-learning-with-python/home/welcome) via Coursera.
 
-In this notebook we will build a classifier to predict whether a loan case will be paid off or not.
+In this notebook we will build a classifier to predict whether a loan case will be paid off or not. We will load a historical dataset from previous loan applications, clean the data, and apply different classification algorithm on the data. The results is reported as the accuracy of each classifier, using the following metrics when these are applicable.
 
-We will load a historical dataset from previous loan applications, clean the data, and apply different classification algorithm on the data.
 
-The following algorithms are expected to build the models:
-
-- K Nearest Neibhbor (KNN)
-- Decision Tree (DT)
-- Support Vector Machine (SVM)
-- Logistic Regression (LR)
-
-The results is reported as the accuracy of each classifier, using the following metrics when these are applicable:
-
-- Jaccard index
-- F1-score
-- LogLoass
+|Algorithms|Evaluation  |
+|-----|-----|
+|K Nearest Neibhbor (KNN) <br> Decision Tree (DT) <br> Support Vector Machine (SVM) <br> Logistic Regression (LR) |Jaccard index <br>F1-score <br> LogLoass|
 
 <!-- more -->
 
-<a href="https://www.bigdatauniversity.com"><img src="https://ibm.box.com/shared/static/cw2c7r3o20w9zn8gkecaeyjhgw3xdgbj.png" width="400" align="center"></a>
+**Table of Contents**
 
-<h1 align="center"><font size="5">Classification with Python</font></h1>
-
-- [1. Environment and Dataset](#1-environment-and-dataset)
-  - [1.1. About dataset](#11-about-dataset)
-  - [1.2. Load Data From CSV File](#12-load-data-from-csv-file)
-  - [1.3. Convert to date time object](#13-convert-to-date-time-object)
-- [2. Pre-processing with Data visualization](#2-pre-processing-with-data-visualization)
-  - [2.1. Visulaition the data](#21-visulaition-the-data)
-  - [2.2. Categorical Encoding](#22-categorical-encoding)
-    - [2.2.1. Gender](#221-gender)
-    - [2.2.2. Education](#222-education)
-  - [2.3. Feature selection](#23-feature-selection)
-  - [2.4. Normalize Data](#24-normalize-data)
-- [3. Classification](#3-classification)
-  - [3.1. K Nearest Neighbor(KNN)](#31-k-nearest-neighborknn)
-  - [3.2. Decision Tree](#32-decision-tree)
-  - [3.3. Support Vector Machine](#33-support-vector-machine)
-  - [3.4. Logistic Regression](#34-logistic-regression)
-- [4. Model Evaluation using Test Data Set](#4-model-evaluation-using-test-data-set)
-  - [4.1. Load Test Data Set for Evaluation](#41-load-test-data-set-for-evaluation)
-  - [4.2. Pre-processing Test Data Set](#42-pre-processing-test-data-set)
+- [1. Environment And Dataset](#1-Environment-And-Dataset)
+  - [1.1. About Dataset](#1-1-About-Dataset)
+  - [1.2. Load Data From CSV File](#1-2-Load-Data-From-Csv-File)
+  - [1.3. Convert To Date Time Object](#1-3-Convert-To-Date-Time-Object)
+- [2. Pre-processing With Data Visualization](#2-Pre-processing-With-Data-Visualization)
+  - [2.1. Visulaition The Data](#2-1-Visulaition-The-Data)
+  - [2.2. Categorical Encoding](#2-2-Categorical---Encoding)
+    - [2.2.1. Gender](#2-2-1-Gender)-
+    - [2.2.2. Education](#2-2-2-Education)
+  - [2.3. Feature Selection](#2-3-Feature-Selection)
+  - [2.4. Normalize Data](#2-4-Normalize-Data)
+- [3. Classification](#3-Classification)
+  - [3.1. K Nearest Neighbor(KNN)](#3-1-K-Nearest-Neighborknn)
+  - [3.2. Decision Tree](#3-2-Decision-Tree)
+  - [3.3. Support Vector Machine](#3-3-Support-Vector-Machine)
+  - [3.4. Logistic Regression](#3-4-Logistic-Regression)
+- [4. Model Evaluation Using Test Data Set](#4-Model-Evaluation-Using-Test-Data-Set)
+  - [4.1. Load Test Data Set For Evaluation](#4-1-Load-Test-Data-Set-For-Evaluation)
+  - [4.2. Pre-processing Test Data Set](#4-2-Pre-processing-Test-Data-Set)
 - [5. Summary](#5-summary)
-  
+
+
+
+
 In this notebook we try to practice all the classification algorithms that we learned in this course.
 
 We load a dataset using Pandas library, and apply the following algorithms, and find the best one for this specific dataset by accuracy evaluation methods.
@@ -67,7 +58,7 @@ We load a dataset using Pandas library, and apply the following algorithms, and 
 - Support Vector Machine (SVM)
 - Logistic Regression (LR)
 
-# 1. Environment and Dataset
+# 1. Environment And Dataset
 
 Lets first load required libraries:
 
@@ -86,7 +77,7 @@ warnings.filterwarnings('ignore')
 %matplotlib inline
 ```
 
-## 1.1. About dataset
+## 1.1. About Dataset
 
 This dataset is about past loans. The __Loan_train.csv__ data set includes details of 346 customers whose loan are already paid off or defaulted. It includes following fields:
 
@@ -230,7 +221,7 @@ df.shape
 
 
 
-## 1.3. Convert to date time object
+## 1.3. Convert To Date Time Object
 
 
 ```python
@@ -344,7 +335,7 @@ df.head()
 
 
 
-# 2. Pre-processing with Data visualization
+# 2. Pre-processing With Data Visualization
 
 
 
@@ -354,7 +345,7 @@ from sklearn import preprocessing
 import seaborn as sns
 
 ```
-## 2.1. Visulaition the data
+## 2.1. Visulaition The Data
 Let’s see how many of each class is in our data set 
 
 
@@ -1178,7 +1169,7 @@ Feature.head()
 
 
 
-## 2.3. Feature selection
+## 2.3. Feature Selection
 
 Lets defind feature sets, X:
 
@@ -1584,7 +1575,7 @@ sum(lrYhat == y_test)/len(y_test)
 
 
 
-# 4. Model Evaluation using Test Data Set
+# 4. Model Evaluation Using Test Data Set
 
 
 ```python
@@ -1598,7 +1589,7 @@ First, download and load the test set:
 
 !wget -O loan_test.csv https://s3-api.us-geo.objectstorage.softlayer.net/cf-courses-data/CognitiveClass/ML0101ENv3/labs/loan_test.csv
 
-## 4.1. Load Test Data Set for Evaluation 
+## 4.1. Load Test Data Set For Evaluation 
 
 
 ```python

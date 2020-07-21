@@ -123,8 +123,7 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
--
-  type: git
+- type: git
   #repo: https://github.com/BinYuOnCa/binyuonca.github.com.git
   repo: git@github.com:BinYuOnCa/binyuonca.github.com.git
   branch: master
@@ -135,10 +134,8 @@ deploy:
   #07ee99afebd067c6b418141e7dd7737791f54a83
   #${GITHUB_TOKEN}
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
--
-  type: shell
+- type: shell
   command: scp -ri public/* aliyun:~/Homepage/public
 
--  
-  type: leancloud_counter_security_sync
+- type: leancloud_counter_security_sync
         

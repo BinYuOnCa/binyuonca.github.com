@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 leancloud_counter_security:
-  enable_sync: true
+  enable_sync: true 
 
   app_id: PFfDnND4aRCqfyvyNs3I5zeB-MdYXbMMI
   #${LEANCLOUD_VISITORS_ID}
@@ -108,12 +108,12 @@ leancloud_counter_security:
   #username: ${LEANCLOUD_USER_ID}
   #password: ${LEANCLOUD_COUNTER_PWD}
 
-  #server_url: https://leancloud.cn
+  server_url: https://leancloud.cn
 
-  #app_id: ejiGxeycbXDtKDB0eLd0TOvx-MdYXbMMI
-  #app_key: lNbbwMxW4v0L1xbOm5fMH2SM
-  #username: ben-hexo-lc 
-  #password: $LEANCLOUD_COUNTER_PWD
+  # app_id: ejiGxeycbXDtKDB0eLd0TOvx-MdYXbMMI
+  # app_key: lNbbwMxW4v0L1xbOm5fMH2SM
+  # username: ben-hexo-lc 
+  # password: $LEANCLOUD_COUNTER_PWD
   # bXDtKDB0eLNbbwMxW4v
 
 

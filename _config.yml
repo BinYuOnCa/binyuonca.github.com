@@ -134,8 +134,8 @@ deploy:
   #07ee99afebd067c6b418141e7dd7737791f54a83
   #${GITHUB_TOKEN}
   message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
-- type: shell
-  command: scp -ri public/* aliyun:~/Homepage/public
+# - type: shell
+#   command: scp -ri public/* aliyun:~/Homepage/public
 
-- type: leancloud_counter_security_sync
+# - type: leancloud_counter_security_sync
         

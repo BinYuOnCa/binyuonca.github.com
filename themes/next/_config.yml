@@ -693,11 +693,11 @@ cnzz_siteid:
 # AppID and AppKey are recommended to be the same as valine's for counter compatibility.
 # Do not enable both `valine.visitor` and `leancloud_visitors`.
 leancloud_visitors:
-  enable: false
+  enable: flase
   app_id: PFfDnND4aRCqfyvyNs3I5zeB-MdYXbMMI
   app_key: SmRgM6YQLDJp6vPh8lddYsDQ
   # Required for apps from CN region
-  server_url: # <your server url>
+  server_url: binyuonca.github.io  # <your server url>
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security
   # If you don't care about security in leancloud counter and just want to use it directly
   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.

@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"binyuonca.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="This notebook will demo the most common data input methods in Pandas.  read_csv read_excel read_html read_sql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Common Data Input Methods in Pandas">
+<meta property="og:url" content="https://binyuonca.github.io/2020/07/24/Common-Data-Input-Methods-in-Pandas/index.html">
+<meta property="og:site_name" content="From Backend Engineer to Data Scientist">
+<meta property="og:description" content="This notebook will demo the most common data input methods in Pandas.  read_csv read_excel read_html read_sql">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-07-24T21:06:04.000Z">
+<meta property="article:modified_time" content="2020-07-29T21:13:32.202Z">
+<meta property="article:author" content="Bin Yu">
+<meta property="article:tag" content="Pandas">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://binyuonca.github.io/2020/07/24/Common-Data-Input-Methods-in-Pandas/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Common Data Input Methods in Pandas | From Backend Engineer to Data Scientist</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171550981-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-171550981-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">From Backend Engineer to Data Scientist</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/BinYuOnCa" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://binyuonca.github.io/2020/07/24/Common-Data-Input-Methods-in-Pandas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Ben_Marathon_Mississauga.gif">
+      <meta itemprop="name" content="Bin Yu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="From Backend Engineer to Data Scientist">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Common Data Input Methods in Pandas
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-24 17:06:04" itemprop="dateCreated datePublished" datetime="2020-07-24T17:06:04-04:00">2020-07-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-29 17:13:32" itemprop="dateModified" datetime="2020-07-29T17:13:32-04:00">2020-07-29</time>
+              </span>
+
+          
+            <span id="/2020/07/24/Common-Data-Input-Methods-in-Pandas/" class="post-meta-item leancloud_visitors" data-flag-title="Common Data Input Methods in Pandas" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-users"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="firestore-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2020/07/24/Common-Data-Input-Methods-in-Pandas/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/24/Common-Data-Input-Methods-in-Pandas/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This notebook will demo the most common data input methods in Pandas.</p>
+<ul>
+<li><a href="#read_csv">read_csv</a></li>
+<li><a href="#read_excel">read_excel</a></li>
+<li><a href="#read_html">read_html</a></li>
+<li><a href="#read_sql">read_sql</a></li>
+</ul>
+<a id="more"></a>
+
+
+<h2 id="Read-CSV-file"><a href="#Read-CSV-file" class="headerlink" title="Read CSV file "></a>Read CSV file <a id="read_csv"></a></h2><p>One of the most common functions/methods for pandas to populate a DataFrame is read data from a <a href="https://en.wikipedia.org/wiki/Comma-separated_values" target="_blank" rel="noopener">comma-seprated values (CSV)</a> file.</p>
+<p>Pandas provides a native funtcion read_csv to perform this task. Thought it supports rich features, the most common/simple way is pass it the file name and it will read the file into DataFrame:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(file_name)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file_name = <span class="string">'iris.csv'</span></span><br><span class="line">df = pd.read_csv(file_name)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}</code></pre><p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal_length</th>
+      <th>sepal_width</th>
+      <th>petal_length</th>
+      <th>petal_width</th>
+      <th>species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>If we do not have columns name in the first row in the file, we can specify them in parameter names:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file_name = <span class="string">'Running.csv'</span></span><br><span class="line">df = pd.read_csv(file_name, names = [<span class="string">'DateTime'</span>,<span class="string">'HeartRate'</span>,<span class="string">'Pace'</span>])</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}</code></pre><p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DateTime</th>
+      <th>HeartRate</th>
+      <th>Pace</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018-02-22T02:24:14Z</td>
+      <td>100</td>
+      <td>2.6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018-02-22T02:24:16Z</td>
+      <td>104</td>
+      <td>2.7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2018-02-22T02:24:18Z</td>
+      <td>104</td>
+      <td>2.6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018-02-22T02:24:20Z</td>
+      <td>107</td>
+      <td>2.6</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018-02-22T02:24:22Z</td>
+      <td>108</td>
+      <td>2.5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>Some other common/useful parameters:</p>
+<ul>
+<li><p><strong>sep</strong>: str, default ‘,’<br> useful when data file use other seperater like space,’|’, ‘\t’, etc.  </p>
+</li>
+<li><p><strong>skiprows</strong>: list-like, int or callable, optional<br> useful when the file has some explaining rows at the top  </p>
+</li>
+<li><p><strong>skipfooter</strong>: int, default 0<br> useful when file has some extra info at the end of the file  </p>
+</li>
+<li><p><strong>nrows</strong>: int, optional<br> useful when you just want read partical rows of a large file  </p>
+</li>
+</ul>
+<p>Although we have many parameters to deal with date parsing, personally I prefer to read the date as is in first  step, following some specific function to parse them seperately. My faviourate is to employ <strong>lambda</strong> function to do the trick.</p>
+<p>We can also specify a URL as the file name as below.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'http://cocl.us/Geospatial_data'</span></span><br><span class="line">geo_info = pd.read_csv(url)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geo_info.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}</code></pre><p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Postal Code</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>M1B</td>
+      <td>43.806686</td>
+      <td>-79.194353</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>M1C</td>
+      <td>43.784535</td>
+      <td>-79.160497</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>M1E</td>
+      <td>43.763573</td>
+      <td>-79.188711</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>M1G</td>
+      <td>43.770992</td>
+      <td>-79.216917</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>M1H</td>
+      <td>43.773136</td>
+      <td>-79.239476</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="Read-Excel-File"><a href="#Read-Excel-File" class="headerlink" title="Read Excel File "></a>Read Excel File <a id="read_excel"></a></h2><p>The function <font style="color:blue">read_excel()</font > provides the capability to read excel files into pandas DataFrame. Similiar with the function <strong>read_csv</strong>, the most basic use-case is passing the file name of the Excel file, and the <span style="color:blue">sheet_name</span>, will read the file into DataFrame:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_excel(file_name, <span class="string">'Sheet1'</span>)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_excel(<span class="string">'SYS_DD.xlsx'</span>,<span class="string">'Sheet1'</span>)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}</code></pre><p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sys_dd_id</th>
+      <th>dd_category_cd</th>
+      <th>dd_value</th>
+      <th>dd_name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>101</td>
+      <td>GPRS_DATA_TYPE</td>
+      <td>R1</td>
+      <td>数据上传</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>102</td>
+      <td>GPRS_DATA_TYPE</td>
+      <td>R2</td>
+      <td>保留</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>103</td>
+      <td>GPRS_DATA_TYPE</td>
+      <td>R3</td>
+      <td>校准上传</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>104</td>
+      <td>GPRS_DATA_TYPE</td>
+      <td>R4</td>
+      <td>版本上传</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>105</td>
+      <td>GPRS_DATA_TYPE</td>
+      <td>R5</td>
+      <td>传感器限值上传</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h2 id="Read-HTML-page"><a href="#Read-HTML-page" class="headerlink" title="Read HTML page "></a>Read HTML page <a id="read_html"></a></h2><p>Function <font style="color:blue">read_html()</font >  is not as common as <font style="color:blue">read_csv/read_excel</font>, but sometimes it’s ready easy the job when you want to fetch table-like data from a website.</p>
+<p>This function searches for ‘&lt;table&gt;’ elements and only for “&lt;tr&gt;” and “&lt;th&gt;” rows and “&lt;td&gt;” elements within each “&lt;tr&gt;” or “&lt;th&gt;” element in the table. “&lt;td&gt;” stands for “table data”.</p>
+<p>Please note that the function will always return a list of DataFrame or it will fail, it will <font style="color:red">NOT</font> return an empty list.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    dfs = pd.read_html(url)</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    print(<span class="string">'Error:&#123;&#125;'</span>.format(e))</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'https://en.wikipedia.org/wiki/List_of_postal_codes_of_Canada:_M'</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    dfs = pd.read_html(url)</span><br><span class="line">    print(<span class="string">'Found &#123;&#125; tables in URL:&#123;&#125;'</span>.format(len(dfs), url))</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    print(<span class="string">'Error:&#123;&#125;'</span>.format(e))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Found 3 tables in URL:https://en.wikipedia.org/wiki/List_of_postal_codes_of_Canada:_M</code></pre><p>Now we can safely check what’s inside these DataFrames, and find out which one is we want.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> idx, df <span class="keyword">in</span> enumerate(dfs):</span><br><span class="line">    print(<span class="string">'DataFrame[&#123;&#125;]:&#123;&#125;'</span>.format(idx, df.shape))</span><br><span class="line"></span><br><span class="line">dfs[<span class="number">0</span>].head()</span><br></pre></td></tr></table></figure>
+
+<pre><code>DataFrame[0]:(180, 3)
+DataFrame[1]:(4, 18)
+DataFrame[2]:(2, 18)</code></pre><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}</code></pre><p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Postal Code</th>
+      <th>Borough</th>
+      <th>Neighborhood</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>M1A</td>
+      <td>Not assigned</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>M2A</td>
+      <td>Not assigned</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>M3A</td>
+      <td>North York</td>
+      <td>Parkwoods</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>M4A</td>
+      <td>North York</td>
+      <td>Victoria Village</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>M5A</td>
+      <td>Downtown Toronto</td>
+      <td>Regent Park, Harbourfront</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<p>Lets wrap <font style="color:blue">read_html</font> to a function, and check the following scenario:<br>(1) URL not found<br>(2) No table in specific URL</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">demo_read_html</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        dfs = pd.read_html(url)</span><br><span class="line">        print(<span class="string">'Found &#123;&#125; tables in URL:&#123;&#125;'</span>.format(len(dfs), url))</span><br><span class="line">        <span class="keyword">return</span> dfs </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">'Error:&#123;&#125;'</span>.format(e))    </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+<p>(1) URL not found   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'https://en.wikipedia.org/wiki/xxxxx'</span></span><br><span class="line">ret = demo_read_html(url)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Error:HTTP Error 404: Not Found</code></pre><p>(2) No table in speific URL</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'https://maps.google.com'</span></span><br><span class="line">ret = demo_read_html(url)</span><br></pre></td></tr></table></figure>
+
+<pre><code>Error:No tables found</code></pre><h2 id="Read-Data-from-DB"><a href="#Read-Data-from-DB" class="headerlink" title="Read Data from DB "></a>Read Data from DB <a id="read_sql"></a></h2><p>Database is the most import data source for many applications. Most companies persistence their business data in varies Databases. In this notebook, we will demostrate how to use pandas function <font style="color:blue">read_sql</font> to fetch data from PostgresSQL database.</p>
+<p>The usage of function <font style="color:blue">read_sql</font> is very simpliar with these ones described above:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_sql(<span class="string">' select * from oridata '</span>, conn)</span><br><span class="line">df.head()</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">Assume that we already set up the PostgresSQL Database <span class="keyword">with</span> data populated <span class="keyword">in</span> table **oridata**. Also the PostgresSQL adapter **Psycopg** installed <span class="keyword">as</span> well.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"><span class="keyword">import</span> psycopg2 <span class="keyword">as</span> pg</span><br></pre></td></tr></table></figure>
+
+
+<p>For data security, the best practise is never hard code the user name, password in the code. Instead of, we employed a simple trick here, to save the credencial in a local file, and make sure this file is not visible to anyone else. More advanced security solution is out of the scope of this demo, will discuss it seperately.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle </span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'db.info'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> input:</span><br><span class="line">    dbConnInfo = pickle.load(input)</span><br><span class="line">    </span><br><span class="line">dbConnInfo.database</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&apos;zlydb&apos;</code></pre><p>Now we can connect to the Database ‘<strong>zlydb</strong>‘ and read table <strong>oridata</strong> from the Database.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conn = pg.connect( database = dbConnInfo.database, user = dbConnInfo.user, password = dbConnInfo.password )</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_sql(<span class="string">' select * from oridata '</span>, conn)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}</code></pre><p></style></p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stockid</th>
+      <th>dt</th>
+      <th>jbcj</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SH600000</td>
+      <td>2018-01-02</td>
+      <td>8954.56</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>SH600000</td>
+      <td>2018-01-03</td>
+      <td>10182.75</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>SH600000</td>
+      <td>2018-01-04</td>
+      <td>7726.19</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>SH600000</td>
+      <td>2018-01-05</td>
+      <td>8126.44</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>SH600000</td>
+      <td>2018-01-08</td>
+      <td>9226.89</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<h3 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h3><p>Below please find the python code to prepare the data info credentical file: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dbinfo</span>:</span></span><br><span class="line">    database = <span class="string">"your DB Name"</span></span><br><span class="line">    user=<span class="string">"your DB user name"</span></span><br><span class="line">    password=<span class="string">"your password "</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'db.info'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> output:</span><br><span class="line">    pickle.dump(dbinfo, output)</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line">You may also add the file into git ignore file to avoid it being pushed into the public repo:</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">$ echo db.info &gt;&gt; .gitignore</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Bin Yu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://binyuonca.github.io/2020/07/24/Common-Data-Input-Methods-in-Pandas/" title="Common Data Input Methods in Pandas">https://binyuonca.github.io/2020/07/24/Common-Data-Input-Methods-in-Pandas/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Pandas/" rel="tag"># Pandas</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/21/Business-Location-Options-in-Toronto/" rel="prev" title="Anomaly Detection For Location Problem">
+      <i class="fa fa-chevron-left"></i> Anomaly Detection For Location Problem
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Read-CSV-file"><span class="nav-number">1.</span> <span class="nav-text">Read CSV file </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Read-Excel-File"><span class="nav-number">2.</span> <span class="nav-text">Read Excel File </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Read-HTML-page"><span class="nav-number">3.</span> <span class="nav-text">Read HTML page </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Read-Data-from-DB"><span class="nav-number">4.</span> <span class="nav-text">Read Data from DB </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Appendix"><span class="nav-number">4.1.</span> <span class="nav-text">Appendix</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Bin Yu"
+      src="/images/Ben_Marathon_Mississauga.gif">
+  <p class="site-author-name" itemprop="name">Bin Yu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/BinYuOnCa" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;BinYuOnCa" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Bin Yu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey   : 'githubblog-3fdfe',
+      projectId: 'AIzaSyC5RnRX7KzELx-7Pt1p-mQgUWNwf84k7gk'
+    });
+
+    function getCount(doc, increaseCount) {
+      // IncreaseCount will be false when not in article page
+      return doc.get().then(d => {
+        var count = 0;
+        if (!d.exists) { // Has no data, initialize count
+          if (increaseCount) {
+            doc.set({
+              count: 1
+            });
+            count = 1;
+          }
+        } else { // Has data
+          count = d.data().count;
+          if (increaseCount) {
+            // If first view this article
+            doc.set({ // Increase count
+              count: count + 1
+            });
+            count++;
+          }
+        }
+
+        return count;
+      });
+    }
+
+    function appendCountTo(el) {
+      return count => {
+        el.innerText = count;
+      }
+    }
+  </script>
+  <script>
+    (function() {
+      var db = firebase.firestore();
+      var articles = db.collection('articles');
+
+      if (CONFIG.page.isPost) { // Is article page
+        var title = document.querySelector('.post-title').innerText.trim();
+        var doc = articles.doc(title);
+        var increaseCount = CONFIG.hostname === location.hostname;
+        if (localStorage.getItem(title)) {
+          increaseCount = false;
+        } else {
+          // Mark as visited
+          localStorage.setItem(title, true);
+        }
+        getCount(doc, increaseCount).then(appendCountTo(document.querySelector('.firestore-visitors-count')));
+      } else if (CONFIG.page.isHome) { // Is index page
+        var promises = [...document.querySelectorAll('.post-title')].map(element => {
+          var title = element.innerText.trim();
+          var doc = articles.doc(title);
+          return getCount(doc);
+        });
+        Promise.all(promises).then(counts => {
+          var metas = document.querySelectorAll('.firestore-visitors-count');
+          counts.forEach((val, idx) => {
+            appendCountTo(metas[idx])(val);
+          });
+        });
+      }
+    })();
+  </script>
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":"flase","app_id":"PFfDnND4aRCqfyvyNs3I5zeB-MdYXbMMI","app_key":"SmRgM6YQLDJp6vPh8lddYsDQ","server_url":"binyuonca.github.io","security":false,"betterPerformance":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'xAbyCllSgFTWSsFRMXGpWyb3-MdYXbMMI',
+      appKey     : 'FdlB5jPO98iemWpRJPcK4Rpc',
+      placeholder: "Make your comments here. Thank you.",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
